@@ -13,7 +13,9 @@ mutex mu;
 unique_lock<mutex> locker;
 condition_variable cond;
 
-void liveTimer(BugsContent*,BugsGen);
+	void liveTimer(BugsContent*, BugsGen&);
+
+
 
 
 

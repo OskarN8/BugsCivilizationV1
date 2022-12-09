@@ -11,7 +11,6 @@
 #include <mutex>
 
 
-
 class BugsGen
 {
 public:

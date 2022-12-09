@@ -2,7 +2,6 @@
 #include <string.h>
 
 
-
 void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 {
 
