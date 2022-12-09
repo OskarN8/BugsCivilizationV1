@@ -17,7 +17,7 @@ void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 
 		Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50));
 		win.draw(Bugs[i]->sprite);
-		new thread(&BugsGen::liveTimer, this, Bugs[i]);
+		//new thread(&BugsGen::liveTimer, this, Bugs[i]);
 	}
 }
 
@@ -25,8 +25,9 @@ void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
 {
 
 
-	unique_lock<mutex> locker(mu);
-	
+
+	//unique_lock<mutex> locker(mu);
+	cout << "Locker moving zamkniety " << endl;
 	
 	if (needNewEndPosition == true)
 	{
@@ -50,28 +51,29 @@ void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
 		}
 		certainBug->sprite.setPosition(certainBug->pos);
 		win.draw(certainBug->sprite);
-
-
 	}
 	else if (certainBug->pos == endPosition)
 	{
 		needNewEndPosition = true;
 	}
-	locker.unlock(); 
-	cond.notify_all();
+
+	//locker.unlock(); 
+	cout << "Locker moving otwarty " << endl;
+	//cond.notify_all();
+	
 	}
 
 
 void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 {
 	
-	unique_lock<mutex> locker(mu);
-
+	//unique_lock<mutex> locker(mu);
+	cout << "Locker hunger zamkniety " << endl;
 	certainBug->hunger -= 1;
-	cout << certainBug->hunger << endl;
+	//cout << certainBug->hunger << endl;
 	if (certainBug->hunger < 60)
 	{
-		//bugsHungerDeath(i);
+		bugsHungerDeath(certainBug);
 	}
 
 	if (certainBug->hunger < 70)
@@ -92,30 +94,45 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 
 	}
-	locker.unlock();
-	cond.notify_all();
+	//locker.unlock();
+	cout << "Locker hunger otwarty " << endl;
+	//cond.notify_all();
 
 }
 
 
 void BugsGen::bugsHungerDeath(BugsContent* certainBug)
 {
-		//delete certainBug;
+
 		//Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug),Bugs.end());
+		//delete certainBug;
+		//cout << certainBug << endl;
 }
 
 
-void::BugsGen::liveTimer(BugsContent* certainBug)
-{
-	Sleep(2000);
-	unique_lock<mutex> locker(mu);
-	cond.wait(locker);
-
-
-	if (Bugs.size() >= 1 && certainBug != NULL)
-	{
-		Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug), Bugs.end());
-		delete certainBug;
-	}
-}
+//void::BugsGen::liveTimer(BugsContent* certainBug)
+//{
+//
+//	Sleep(20000);
+//	//unique_lock<mutex> locker(mu);
+//	cout << "Locker timera zamkniety " << endl;
+//	//cond.wait(locker);
+//	cout << "Timer po warunku " << endl;
+//
+//
+//
+//	if (Bugs.size() >= 1 && certainBug != NULL)
+//	{
+//		Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug), Bugs.end());
+//		try
+//		{
+//			delete certainBug;
+//		}
+//		catch (...)
+//		{
+//			cerr << " cos " << endl;
+//		}
+//	}
+//	cout << "koniec timera " << endl;
+//}
 

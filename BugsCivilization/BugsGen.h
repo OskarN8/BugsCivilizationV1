@@ -15,22 +15,22 @@
 class BugsGen
 {
 public:
-	mutex mu;
-	unique_lock<mutex> locker;
-	condition_variable cond;
+	//mutex mu;
+	//unique_lock<mutex> locker;
+	//condition_variable cond;
 
 
 	vector<BugsContent*> Bugs;
-	Vector2f oldEndPosiotion, endPosition;
+	Vector2f endPosition;
 	bool needNewEndPosition = true;
-	BugsContent* bug;
+
 
 
 	void bugsFirstDraw(RenderWindow&, int);
 	void movingPath(RenderWindow&, BugsContent*);
 	void hungerBehaviour(MapGen&, BugsContent*);
 	void bugsHungerDeath(BugsContent*);
-	void liveTimer(BugsContent*);
+	//void liveTimer(BugsContent*);
 };
 
 #endif

@@ -1,14 +1,28 @@
-#include <SFML/Graphics.hpp>
 #include "Main.h"
-#include "MapBlock.h"
-#include "MapGen.h"
-#include "BugsGen.h"
-#include <time.h>
-#include <iostream>
-#include <conio.h>
-#include <windows.h>
 
+void liveTimer(BugsContent* certainBug,BugsGen bugsGen)
+{
+	Sleep(3000);
+	unique_lock<mutex> locker(mu);
+	cout << "Locker timera zamkniety " << endl;
+	cond.wait(locker);
+	cout << "Timer po warunku " << endl;
 
+	if (bugsGen.Bugs.size() >= 1 && certainBug != NULL)
+	{
+		bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
+		try
+		{
+			delete certainBug;
+		}
+		catch (...)
+		{
+			cerr << " cos " << endl;
+		}
+	}
+	cout << "koniec timera " << endl;
+
+}
 
 int main()
 {
@@ -25,6 +39,12 @@ int main()
 	mapGen.MapFirstDraw(window);
 	bugsGen.bugsFirstDraw(window, howManyBugs);
 
+	for (BugsContent* i : bugsGen.Bugs)
+	{
+		new thread(liveTimer,i, bugsGen);
+	}
+
+
 	// <END PART1>
 
 	while (window.isOpen())
@@ -37,20 +57,21 @@ int main()
 				window.close();
 			}
 		}
-
+		unique_lock<mutex> locker(mu);
 		mapGen.MapDrawUpdate(window);
+		int l = 0;
 		for (BugsContent* i : bugsGen.Bugs)
 		{
-			if(i != NULL) bugsGen.movingPath(window, i);
-			if (i != NULL) bugsGen.hungerBehaviour(mapGen, i);
-				
 			
+			cout << l << endl;
+				bugsGen.movingPath(window, i);
+				bugsGen.hungerBehaviour(mapGen, i);
+				l++;
 
-			//{
-			//	bugsGen.bugsHungerDeath(i);
-			//}
 		}
-
+		
+		locker.unlock();
+		cond.notify_all();
 		Sleep(1);
 		window.display();
 
