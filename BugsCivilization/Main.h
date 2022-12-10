@@ -8,7 +8,7 @@
 #include <conio.h>
 #include <windows.h>
 
-int howManyBugs;
+int howManyBugs, counter = 0;
 mutex mu;
 unique_lock<mutex> locker;
 condition_variable cond;

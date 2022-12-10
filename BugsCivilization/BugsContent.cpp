@@ -18,7 +18,6 @@ BugsContent::BugsContent(int x, int y)
 
 BugsContent::~BugsContent()
 {
-
 	cout << "Robal usuniety" << endl;
 }
 

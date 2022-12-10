@@ -9,13 +9,14 @@
 #include "MapBlock.h"
 
 
+
 using namespace std;
 using namespace sf;
 class MapGen
 {
 	int Fx, Fy;
 public:
-	int gridLength = 0;
+	int gridLength = 10;
 	int counter = 0;
 	vector<MapBlock*> Blocks;
 	vector<vector<MapBlock*>> MapBlocks2D;

@@ -5,34 +5,32 @@
 void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 {
 
-	default_random_engine gen(time(NULL) + rand());
+	default_random_engine gen(time(NULL)+rand());
 
 
 	for (int i = 0; i < howMany; i++)
 	{
-		uniform_int_distribution<int> distX(1, 19);
-		uniform_int_distribution<int> distY(1, 19);
+		uniform_int_distribution<int> distX(1, 4);
+		uniform_int_distribution<int> distY(1, 4);
 
 
 		Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50));
 		win.draw(Bugs[i]->sprite);
-		//new thread(&BugsGen::liveTimer, this, Bugs[i]);
+
 	}
 }
 
-void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
+void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug,int counter)
 {
 
-
-
-	//unique_lock<mutex> locker(mu);
-	cout << "Locker moving zamkniety " << endl;
-	
 	if (needNewEndPosition == true)
 	{
-		default_random_engine gen(time(NULL) + rand());
-		uniform_int_distribution<int> dirX(50, 950);
-		uniform_int_distribution<int> dirY(50, 950);
+
+		default_random_engine gen(std::chrono::system_clock::now().time_since_epoch().count());
+
+		uniform_int_distribution<int> dirX(50, 450);
+		uniform_int_distribution<int> dirY(50, 450);
+
 
 		needNewEndPosition = false;
 
@@ -56,26 +54,23 @@ void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
 		needNewEndPosition = true;
 	}
 
-	//locker.unlock(); 
-	cout << "Locker moving otwarty " << endl;
-	//cond.notify_all();
-	
 	}
 
 
 void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 {
 	
-	//unique_lock<mutex> locker(mu);
-	cout << "Locker hunger zamkniety " << endl;
+
 	certainBug->hunger -= 1;
-	//cout << certainBug->hunger << endl;
-	if (certainBug->hunger < 60)
+	cout << certainBug->hunger << endl;
+
+	if (certainBug->hunger < 0 && certainBug->hungerResistance == false)
 	{
 		bugsHungerDeath(certainBug);
+	    certainBug = NULL;
 	}
 
-	if (certainBug->hunger < 70)
+	else if (certainBug->hunger < 80 && certainBug->hungerResistance == false)
 	{
 		int rowX = (certainBug->pos.x + 25) / 100;
 		int rowY = (certainBug->pos.y + 25) / 100;
@@ -93,21 +88,18 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 
 	}
-	//locker.unlock();
-	cout << "Locker hunger otwarty " << endl;
-	//cond.notify_all();
+
+
 
 }
-
 
 void BugsGen::bugsHungerDeath(BugsContent* certainBug)
 {
+		Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug),Bugs.end());
+		certainBug = NULL;
+		delete certainBug;
 
-		//Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug),Bugs.end());
-		//delete certainBug;
-		//cout << certainBug << endl;
 }
-
 
 //void::BugsGen::liveTimer(BugsContent* certainBug)
 //{

@@ -7,27 +7,19 @@
 #include <vector>
 #include "MapGen.h"
 
-
-
-
 using namespace sf;
 using namespace std;
-
 
 class BugsContent
 {
 public:
 	Sprite sprite;
 	Texture txt;
-	Vector2f pos/*, endPosition*/; 
-	//bool needNewEndPosition = true;
-	int  hunger,hungerResistance, age, size;
-	//Vector2f oldEndPosiotion;
+	Vector2f pos;
+	bool hungerResistance = false;
+	int  hunger, age, size;
 	~BugsContent();
 	BugsContent(int,int);
-
-
-
 };
 #endif
 

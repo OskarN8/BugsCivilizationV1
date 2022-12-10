@@ -5,14 +5,10 @@
 int main()
 {
 
-	RenderWindow window(VideoMode(1000, 1000), "Bugs Civilization!");
-
-
+	RenderWindow window(VideoMode(500, 500), "Bugs Civilization!");
 	MapGen mapGen;
 	BugsGen bugsGen;
-
-	howManyBugs = 10;
-
+	howManyBugs = 5;
 	// <PART 1> - MAP AND BUGS FIST GENERATION
 	window.clear();
 	mapGen.MapFirstDraw(window);
@@ -20,10 +16,8 @@ int main()
 
 	for (BugsContent* i : bugsGen.Bugs)
 	{
-		new thread(&liveTimer,i, ref(bugsGen));
+		new thread(&liveTimer, i, ref(bugsGen));
 	}
-
-
 	// <END PART1>
 
 	while (window.isOpen())
@@ -37,49 +31,35 @@ int main()
 			}
 		}
 		unique_lock<mutex> locker(mu);
+		cout << "Zablokowane" << endl;
 		mapGen.MapDrawUpdate(window);
-		int l = 0;
-		for (BugsContent* i : bugsGen.Bugs)
+		if (bugsGen.Bugs.size() > 0)
 		{
-
-			cout <<"Iteruje robaka " << l << endl;
-				bugsGen.movingPath(window, i);
+			for (BugsContent* i : bugsGen.Bugs)
+			{
+				
+				bugsGen.movingPath(window, i,counter);
+				Sleep(0.91);
 				bugsGen.hungerBehaviour(mapGen, i);
-				l++;
+			}
 		}
-		
 		locker.unlock();
+		cout << "Odblokowane" << endl;
 		cond.notify_all();
 		Sleep(1);
 		window.display();
-
 	}
 	return 0;
 }
 
 void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 {
-	Sleep(3000);
+	Sleep(30000);
 	unique_lock<mutex> locker(mu);
-	cout << "Locker timera zamkniety " << endl;
+	cout << "Locker zamkniety" << endl;
 	cond.wait(locker);
-	cout << "Timer po warunku " << endl;
-
-
 	bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
-
-
-	cout << bugsGen.Bugs.size() << endl;
-	//for (auto i : bugsGen.Bugs)
-	//{
-	//	cout << i << endl;
-	//}
-
-	delete certainBug;
 	certainBug = NULL;
-
-
-	cout << "koniec timera " << endl;
-
+	delete certainBug;
 }
 

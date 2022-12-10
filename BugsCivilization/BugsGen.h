@@ -11,6 +11,9 @@
 #include <mutex>
 
 
+	
+
+
 class BugsGen
 {
 public:
@@ -26,7 +29,7 @@ public:
 
 
 	void bugsFirstDraw(RenderWindow&, int);
-	void movingPath(RenderWindow&, BugsContent*);
+	void movingPath(RenderWindow&, BugsContent*,int);
 	void hungerBehaviour(MapGen&, BugsContent*);
 	void bugsHungerDeath(BugsContent*);
 	//void liveTimer(BugsContent*);
