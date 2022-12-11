@@ -133,7 +133,7 @@ bool BugsGen::bugsCopulation(BugsContent* certainBug)
 	return false;
 }
 
-void BugsGen::CopulationTimer(BugsContent* certainBug,BugsGen& bugsGen)
+void BugsGen::CopulationTimer(BugsContent* certainBug)
 {
 	while (certainBug->canCopulate == true)
 	{

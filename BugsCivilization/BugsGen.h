@@ -25,7 +25,7 @@ public:
 	void hungerBehaviour(MapGen&, BugsContent*);
 	void bugsHungerDeath(BugsContent*);
 	bool bugsCopulation(BugsContent*);
-	void CopulationTimer(BugsContent*, BugsGen&);
+	void CopulationTimer(BugsContent*);
 
 };
 

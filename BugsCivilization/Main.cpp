@@ -17,7 +17,7 @@ int main()
 	for (BugsContent* i : bugsGen.Bugs)
 	{
 		new thread(&liveTimer, i, ref(bugsGen));
-		new thread(&BugsGen::CopulationTimer,i,ref(bugsGen));
+		//new thread(&BugsGen::CopulationTimer,i);
 
 	}
 	// <END PART1>
