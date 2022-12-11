@@ -17,6 +17,8 @@ int main()
 	for (BugsContent* i : bugsGen.Bugs)
 	{
 		new thread(&liveTimer, i, ref(bugsGen));
+		new thread(&BugsGen::CopulationTimer,i,ref(bugsGen));
+
 	}
 	// <END PART1>
 
@@ -38,15 +40,20 @@ int main()
 			for (BugsContent* i : bugsGen.Bugs)
 			{
 				
-				bugsGen.movingPath(window, i,counter);
-				Sleep(0.91);
+				bugsGen.movingPath(window, i);
 				bugsGen.hungerBehaviour(mapGen, i);
+				if (bugsGen.bugsCopulation(i) == true)
+				{
+					new thread(&liveTimer, i, ref(bugsGen));
+					//new thread(&BugsGen::CopulationTimer, i);
+				}
 			}
+
 		}
+		Sleep(1);
 		locker.unlock();
 		cout << "Odblokowane" << endl;
 		cond.notify_all();
-		Sleep(1);
 		window.display();
 	}
 	return 0;

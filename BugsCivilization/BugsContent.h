@@ -15,11 +15,13 @@ class BugsContent
 public:
 	Sprite sprite;
 	Texture txt;
-	Vector2f pos;
-	bool hungerResistance = false;
-	int  hunger, age, size;
+	Vector2f pos, endPosition;
+	bool needNewEndPosition = true, hungerResistance = false, canCopulate,readyToCopulate;
+	int   age=0, size;
+	float hunger;
 	~BugsContent();
 	BugsContent(int,int);
+
 };
 #endif
 

@@ -9,6 +9,7 @@
 #include "BugsContent.h"
 #include "MapGen.h"
 #include <mutex>
+#include <string.h>
 
 
 	
@@ -17,22 +18,15 @@
 class BugsGen
 {
 public:
-	//mutex mu;
-	//unique_lock<mutex> locker;
-	//condition_variable cond;
-
 
 	vector<BugsContent*> Bugs;
-	Vector2f endPosition;
-	bool needNewEndPosition = true;
-
-
-
 	void bugsFirstDraw(RenderWindow&, int);
-	void movingPath(RenderWindow&, BugsContent*,int);
+	void movingPath(RenderWindow&, BugsContent*);
 	void hungerBehaviour(MapGen&, BugsContent*);
 	void bugsHungerDeath(BugsContent*);
-	//void liveTimer(BugsContent*);
+	bool bugsCopulation(BugsContent*);
+	void CopulationTimer(BugsContent*, BugsGen&);
+
 };
 
 #endif

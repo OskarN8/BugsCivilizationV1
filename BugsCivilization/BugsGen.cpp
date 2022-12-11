@@ -1,5 +1,5 @@
 #include "BugsGen.h"
-#include <string.h>
+
 
 
 void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
@@ -15,43 +15,46 @@ void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 
 
 		Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50));
+
 		win.draw(Bugs[i]->sprite);
+
+
 
 	}
 }
 
-void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug,int counter)
+void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
 {
 
-	if (needNewEndPosition == true)
+	if (certainBug->needNewEndPosition == true)
 	{
 
-		default_random_engine gen(std::chrono::system_clock::now().time_since_epoch().count());
+		default_random_engine gen(time(NULL) + rand());
 
 		uniform_int_distribution<int> dirX(50, 450);
 		uniform_int_distribution<int> dirY(50, 450);
 
 
-		needNewEndPosition = false;
+		certainBug->needNewEndPosition = false;
 
-		endPosition = Vector2f(int(dirX(gen)), int(dirY(gen)));
+		certainBug->endPosition = Vector2f(int(dirX(gen)), int(dirY(gen)));
 	}
-	else if (certainBug->pos != endPosition)
+	else if (certainBug->pos != certainBug->endPosition)
 	{
 
-		(certainBug->pos.x < endPosition.x) ? certainBug->pos.x += 1 : certainBug->pos.x -= 1;
+		(certainBug->pos.x < certainBug->endPosition.x) ? certainBug->pos.x += 1 : certainBug->pos.x -= 1;
 
-		if (certainBug->pos != endPosition)
+		if (certainBug->pos != certainBug->endPosition)
 		{
-			(certainBug->pos.y < endPosition.y) ? certainBug->pos.y += 1 : certainBug->pos.y -= 1;
+			(certainBug->pos.y < certainBug->endPosition.y) ? certainBug->pos.y += 1 : certainBug->pos.y -= 1;
 
 		}
 		certainBug->sprite.setPosition(certainBug->pos);
 		win.draw(certainBug->sprite);
 	}
-	else if (certainBug->pos == endPosition)
+	else if (certainBug->pos == certainBug->endPosition)
 	{
-		needNewEndPosition = true;
+		certainBug->needNewEndPosition = true;
 	}
 
 	}
@@ -61,7 +64,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 {
 	
 
-	certainBug->hunger -= 1;
+	certainBug->hunger -= 0.1;
 	cout << certainBug->hunger << endl;
 
 	if (certainBug->hunger < 0 && certainBug->hungerResistance == false)
@@ -88,6 +91,10 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 
 	}
+	if (certainBug->hunger < 80 && certainBug->age !=1)
+	{
+		certainBug->age = 1;
+	}
 
 
 
@@ -101,29 +108,41 @@ void BugsGen::bugsHungerDeath(BugsContent* certainBug)
 
 }
 
-//void::BugsGen::liveTimer(BugsContent* certainBug)
-//{
-//
-//	Sleep(20000);
-//	//unique_lock<mutex> locker(mu);
-//	cout << "Locker timera zamkniety " << endl;
-//	//cond.wait(locker);
-//	cout << "Timer po warunku " << endl;
-//
-//
-//
-//	if (Bugs.size() >= 1 && certainBug != NULL)
-//	{
-//		Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug), Bugs.end());
-//		try
-//		{
-//			delete certainBug;
-//		}
-//		catch (...)
-//		{
-//			cerr << " cos " << endl;
-//		}
-//	}
-//	cout << "koniec timera " << endl;
-//}
+bool BugsGen::bugsCopulation(BugsContent* certainBug)
+{
+	if (certainBug->readyToCopulate == true)
+	{
+		for (BugsContent* i : Bugs)
+		{
+			if (i != certainBug && certainBug->sprite.getGlobalBounds().intersects(i->sprite.getGlobalBounds()))
+			{
+
+				default_random_engine gen(time(NULL) + rand());
+
+				uniform_int_distribution<int> distX(1, 4);
+				uniform_int_distribution<int> distY(1, 4);
+
+				Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50));
+				
+				certainBug->readyToCopulate = false;
+				return true; // do tworzenia watku liveTimer()
+
+			}
+		}
+	}
+	return false;
+}
+
+void BugsGen::CopulationTimer(BugsContent* certainBug,BugsGen& bugsGen)
+{
+	while (certainBug->canCopulate == true)
+	{
+
+		Sleep(10000);
+		certainBug->readyToCopulate = false;
+		Sleep(10000);
+		certainBug->readyToCopulate = true;
+	}
+}
+
 

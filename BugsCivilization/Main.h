@@ -8,12 +8,12 @@
 #include <conio.h>
 #include <windows.h>
 
-int howManyBugs, counter = 0;
+int howManyBugs;
 mutex mu;
 unique_lock<mutex> locker;
 condition_variable cond;
 
-	void liveTimer(BugsContent*, BugsGen&);
+void liveTimer(BugsContent*, BugsGen&);
 
 
 
