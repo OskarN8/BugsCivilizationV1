@@ -11,7 +11,7 @@ BugsContent::BugsContent(int x, int y)
 	pos = Vector2f(x,y);
 	hunger = 100;
 	canCopulate = true;
-	readyToCopulate = true;
+	readyToCopulate = false;
 	sprite.setTexture(txt);
 	sprite.setTextureRect(IntRect(0, 0, 50, 50));
 	sprite.setPosition(pos);

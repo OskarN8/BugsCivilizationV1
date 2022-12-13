@@ -117,12 +117,9 @@ bool BugsGen::bugsCopulation(BugsContent* certainBug)
 			if (i != certainBug && certainBug->sprite.getGlobalBounds().intersects(i->sprite.getGlobalBounds()))
 			{
 
-				default_random_engine gen(time(NULL) + rand());
 
-				uniform_int_distribution<int> distX(1, 4);
-				uniform_int_distribution<int> distY(1, 4);
 
-				Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50));
+				Bugs.push_back(new BugsContent(certainBug->pos.x, certainBug->pos.y));
 				
 				certainBug->readyToCopulate = false;
 				return true; // do tworzenia watku liveTimer()
@@ -139,9 +136,9 @@ void BugsGen::CopulationTimer(BugsContent* certainBug)
 	{
 
 		Sleep(10000);
-		certainBug->readyToCopulate = false;
-		Sleep(10000);
 		certainBug->readyToCopulate = true;
+		Sleep(10000);
+		certainBug->readyToCopulate = false;
 	}
 }
 

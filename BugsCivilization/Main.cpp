@@ -17,7 +17,7 @@ int main()
 	for (BugsContent* i : bugsGen.Bugs)
 	{
 		new thread(&liveTimer, i, ref(bugsGen));
-		//new thread(&BugsGen::CopulationTimer,i);
+		new thread(&BugsGen::CopulationTimer, bugsGen, i);
 
 	}
 	// <END PART1>
@@ -33,7 +33,6 @@ int main()
 			}
 		}
 		unique_lock<mutex> locker(mu);
-		cout << "Zablokowane" << endl;
 		mapGen.MapDrawUpdate(window);
 		if (bugsGen.Bugs.size() > 0)
 		{
@@ -45,14 +44,13 @@ int main()
 				if (bugsGen.bugsCopulation(i) == true)
 				{
 					new thread(&liveTimer, i, ref(bugsGen));
-					//new thread(&BugsGen::CopulationTimer, i);
+					new thread(&BugsGen::CopulationTimer,bugsGen,i);
 				}
 			}
 
 		}
 		Sleep(1);
 		locker.unlock();
-		cout << "Odblokowane" << endl;
 		cond.notify_all();
 		window.display();
 	}
