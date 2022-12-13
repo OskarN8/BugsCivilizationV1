@@ -17,7 +17,7 @@ int main()
 	for (BugsContent* i : bugsGen.Bugs)
 	{
 		new thread(&liveTimer, i, ref(bugsGen));
-		new thread(&BugsGen::CopulationTimer, bugsGen, i);
+		//new thread(&BugsGen::CopulationTimer, bugsGen, i);
 
 	}
 	// <END PART1>
@@ -40,12 +40,17 @@ int main()
 			{
 				
 				bugsGen.movingPath(window, i);
+				bugsGen.bugsCopulation(i);
 				bugsGen.hungerBehaviour(mapGen, i);
-				if (bugsGen.bugsCopulation(i) == true)
-				{
-					new thread(&liveTimer, i, ref(bugsGen));
-					new thread(&BugsGen::CopulationTimer,bugsGen,i);
-				}
+
+				//BugsContent* newBug = bugsGen.bugsCopulation(i);
+				//if(newBug != NULL)
+				//{
+					//new thread(&liveTimer, newBug, ref(bugsGen));
+					//new thread(&BugsGen::CopulationTimer,bugsGen, newBug);
+					//new thread(&BugsGen::CopulationTimer,bugsGen, i);
+					//new thread(&BugsGen::CopulationTimer,bugsGen, );
+				//}
 			}
 
 		}
@@ -66,5 +71,7 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 	bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
 	certainBug = NULL;
 	delete certainBug;
+
+
 }
 
