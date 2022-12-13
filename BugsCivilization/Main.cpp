@@ -64,14 +64,29 @@ int main()
 
 void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 {
-	Sleep(30000);
-	unique_lock<mutex> locker(mu);
-	cout << "Locker zamkniety" << endl;
-	cond.wait(locker);
-	bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
-	certainBug = NULL;
-	delete certainBug;
+	while (certainBug->isAlive == true)
+	{
+		Sleep(1000);
+		certainBug->lifeSeconds++;
 
+		if (certainBug->readyToCopulate == false)
+		{
+			certainBug->copulateSeconds++;
+			if (certainBug->copulateSeconds % 10 == 0)
+			{
+				certainBug->readyToCopulate = true;
+			}
+		}
+		else if (certainBug->lifeSeconds > 30)
+		{
+			unique_lock<mutex> locker(mu);
+			cout << "Locker zamkniety" << endl;
+			cond.wait(locker);
+			bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
+			certainBug = NULL;
+			delete certainBug;
+		}
+	}
 
 }
 

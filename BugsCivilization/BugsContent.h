@@ -16,8 +16,8 @@ public:
 	Sprite sprite;
 	Texture txt;
 	Vector2f pos, endPosition;
-	bool needNewEndPosition = true, hungerResistance = false, canCopulate,readyToCopulate;
-	int   age=0, size;
+	bool needNewEndPosition = true, hungerResistance = false, canCopulate,readyToCopulate, isAlive = true;
+	int   age=0, size = 0,lifeSeconds = 0, copulateSeconds = 0;
 	float hunger;
 	~BugsContent();
 	BugsContent(int,int);
