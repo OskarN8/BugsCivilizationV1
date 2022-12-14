@@ -13,7 +13,6 @@ void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 		uniform_int_distribution<int> distX(1, 4);
 		uniform_int_distribution<int> distY(1, 4);
 		Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50));
-		new thread(&BugsGen::CopulationTimer, this, Bugs[i]);
 		win.draw(Bugs[i]->sprite);
 
 
@@ -63,7 +62,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 	
 
 	certainBug->hunger -= 0.1;
-	cout << certainBug->hunger << endl;
+	//cout << certainBug->hunger << endl;
 
 	if (certainBug->hunger < 0 && certainBug->hungerResistance == false)
 	{
@@ -129,12 +128,6 @@ BugsContent* BugsGen::bugsCopulation(BugsContent* certainBug)
 	return NULL;
 }
 
-void BugsGen::CopulationTimer(BugsContent* certainBug)
-{
 
-		Sleep(5000);
-		certainBug->readyToCopulate = true;
-
-}
 
 

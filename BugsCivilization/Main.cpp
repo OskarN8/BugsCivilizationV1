@@ -33,6 +33,7 @@ int main()
 			}
 		}
 		unique_lock<mutex> locker(mu);
+		cout << "Zablokowany moment poruszania" << endl;
 		mapGen.MapDrawUpdate(window);
 		if (bugsGen.Bugs.size() > 0)
 		{
@@ -57,6 +58,7 @@ int main()
 		Sleep(1);
 		locker.unlock();
 		cond.notify_all();
+		cout << "Odblokowany moment poruszania" << endl;
 		window.display();
 	}
 	return 0;
@@ -65,7 +67,7 @@ int main()
 void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 {
 
-	while (1)
+	while (certainBug->isAlive == true)
 	{
 
 		Sleep(1000);
@@ -87,24 +89,30 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 		if (certainBug->readyToCopulate == false)
 		{
 			certainBug->copulateSeconds++;
-			if (certainBug->copulateSeconds % 10 == 0)
+			if (certainBug->copulateSeconds % 20 == 0)
 			{
 				certainBug->readyToCopulate = true;
 			}
 		}
-		else if (certainBug->lifeSeconds > 10)
+		else if (certainBug->lifeSeconds > 7)
 		{
+			cout << "Mamy 7 SEKUND | Robakow jest: "<< bugsGen.Bugs.size() << endl;
 			unique_lock<mutex> locker(mu);
 			cout << "Locker zamkniety" << endl;
 			cond.wait(locker);
+			cout << "Warunek odebrany USUWAMY" << endl;
 			certainBug->isAlive = false;
 			bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
 			certainBug = NULL;
 			delete certainBug;
+			
+			cout << "Robak usuniety, jest ich: "<<bugsGen.Bugs.size() << endl;
+			
 			break;
 
 		}
 	}
+	cout << "THREAD ZAKONCZONY" << endl;
 
 }
 
