@@ -16,13 +16,13 @@ class BugsContent
 {
 public:
 	Sprite sprite;
-	Texture txt;
+	Texture texture;
 	Vector2f pos, endPosition;
 	bool needNewEndPosition, hungerResistance, canCopulate,readyToCopulate, isAlive;
 	int   age=0, size, lifeSeconds, copulateSeconds, childrens;
 	float hunger;
 	~BugsContent();
-	BugsContent(int,int);
+	BugsContent(int,int,Texture);
 
 
 };

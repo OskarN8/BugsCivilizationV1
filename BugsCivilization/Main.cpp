@@ -12,6 +12,7 @@ int main()
 	// <PART 1> - MAP AND BUGS FIST GENERATION
 	window.clear();
 	mapGen.MapFirstDraw(window);
+	bugsGen.LoadTextures();
 	bugsGen.bugsFirstDraw(window, howManyBugs);
 	
 	

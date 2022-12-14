@@ -19,6 +19,7 @@ class BugsGen
 {
 public:
 
+	Texture txt;
 	vector<BugsContent*> Bugs;
 	void bugsFirstDraw(RenderWindow&, int);
 	void movingPath(RenderWindow&, BugsContent*);
@@ -26,6 +27,7 @@ public:
 	void bugsHungerDeath(BugsContent*);
 	bool bugsCopulation(BugsContent*);
 	void CopulationTimer(BugsContent*);
+	void LoadTextures();
 
 };
 

@@ -12,10 +12,15 @@ void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 	{
 		uniform_int_distribution<int> distX(1, 4);
 		uniform_int_distribution<int> distY(1, 4);
-		Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50));
+		Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50,txt));
 		win.draw(Bugs[i]->sprite);
 
 	}
+}
+
+void BugsGen::LoadTextures()
+{
+	this->txt.loadFromFile("images/bug.png");
 }
 
 void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
@@ -113,7 +118,7 @@ bool BugsGen::bugsCopulation(BugsContent* certainBug)
 				i->readyToCopulate = false;
 				for (int y = 0;y < certainBug->childrens;y++)
 				{
-					Bugs.push_back(new BugsContent(certainBug->pos.x, certainBug->pos.y));
+					Bugs.push_back(new BugsContent(certainBug->pos.x, certainBug->pos.y,txt));
 					Bugs.back()->readyToCopulate = false;
 				}
 

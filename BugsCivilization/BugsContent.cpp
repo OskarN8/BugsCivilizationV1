@@ -2,12 +2,9 @@
 
 
 
-BugsContent::BugsContent(int x, int y)
+BugsContent::BugsContent(int x, int y,Texture txt)
 {
-	if (!txt.loadFromFile("images/bug.png"))
-	{
-		cout << "cos nie tak";
-	}
+	texture = txt;
 	pos = Vector2f(x,y);
 	size = 0;
 	lifeSeconds = 0;
