@@ -106,7 +106,7 @@ void BugsGen::bugsHungerDeath(BugsContent* certainBug)
 
 }
 
-void BugsGen::bugsCopulation(BugsContent* certainBug)
+BugsContent* BugsGen::bugsCopulation(BugsContent* certainBug)
 {
 	if (certainBug->readyToCopulate == true)
 	{
@@ -122,11 +122,11 @@ void BugsGen::bugsCopulation(BugsContent* certainBug)
 				//new thread(&BugsGen::CopulationTimer, this, i);
 				//new thread(&BugsGen::CopulationTimer, this, Bugs.back());
 
-				//return Bugs.back(); // do tworzenia watku liveTimer()
+				return Bugs.back(); // do tworzenia watku liveTimer()
 			}
 		}
 	}
-	//return NULL;
+	return NULL;
 }
 
 void BugsGen::CopulationTimer(BugsContent* certainBug)

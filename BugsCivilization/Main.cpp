@@ -40,17 +40,17 @@ int main()
 			{
 				
 				bugsGen.movingPath(window, i);
-				bugsGen.bugsCopulation(i);
+				//bugsGen.bugsCopulation(i);
 				bugsGen.hungerBehaviour(mapGen, i);
 
-				//BugsContent* newBug = bugsGen.bugsCopulation(i);
-				//if(newBug != NULL)
-				//{
-					//new thread(&liveTimer, newBug, ref(bugsGen));
+				BugsContent* newBug = bugsGen.bugsCopulation(i);
+				if(newBug != NULL)
+				{
+					new thread(&liveTimer, newBug, ref(bugsGen));
 					//new thread(&BugsGen::CopulationTimer,bugsGen, newBug);
 					//new thread(&BugsGen::CopulationTimer,bugsGen, i);
 					//new thread(&BugsGen::CopulationTimer,bugsGen, );
-				//}
+				}
 			}
 
 		}
@@ -64,10 +64,25 @@ int main()
 
 void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 {
-	while (certainBug->isAlive == true)
+
+	while (1)
 	{
+
 		Sleep(1000);
 		certainBug->lifeSeconds++;
+
+		if (certainBug->age == 0 && certainBug->lifeSeconds > 15)
+		{
+			certainBug->age++;
+		}
+		else if (certainBug->age == 1 && certainBug->lifeSeconds > 30)
+		{
+			certainBug->age++;
+		}
+		else if (certainBug->age == 2 && certainBug->lifeSeconds > 45)
+		{
+			certainBug->age++;
+		}
 
 		if (certainBug->readyToCopulate == false)
 		{
@@ -77,14 +92,17 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 				certainBug->readyToCopulate = true;
 			}
 		}
-		else if (certainBug->lifeSeconds > 30)
+		else if (certainBug->lifeSeconds > 10)
 		{
 			unique_lock<mutex> locker(mu);
 			cout << "Locker zamkniety" << endl;
 			cond.wait(locker);
+			certainBug->isAlive = false;
 			bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
 			certainBug = NULL;
 			delete certainBug;
+			break;
+
 		}
 	}
 

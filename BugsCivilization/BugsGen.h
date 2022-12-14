@@ -24,7 +24,7 @@ public:
 	void movingPath(RenderWindow&, BugsContent*);
 	void hungerBehaviour(MapGen&, BugsContent*);
 	void bugsHungerDeath(BugsContent*);
-	void bugsCopulation(BugsContent*);
+	BugsContent* bugsCopulation(BugsContent*);
 	void CopulationTimer(BugsContent*);
 
 };
