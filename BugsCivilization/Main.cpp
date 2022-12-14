@@ -13,7 +13,8 @@ int main()
 	window.clear();
 	mapGen.MapFirstDraw(window);
 	bugsGen.bugsFirstDraw(window, howManyBugs);
-
+	
+	
 	for (BugsContent* i : bugsGen.Bugs)
 	{
 		new thread(&liveTimer, i, ref(bugsGen));
@@ -40,20 +41,18 @@ int main()
 			for (BugsContent* i : bugsGen.Bugs)
 			{
 				
-				bugsGen.movingPath(window, i);
-				//bugsGen.bugsCopulation(i);
-				bugsGen.hungerBehaviour(mapGen, i);
+				if(i!= NULL)bugsGen.movingPath(window, i);
+				
 
-				BugsContent* newBug = bugsGen.bugsCopulation(i);
-				if(newBug != NULL)
+				if(i != NULL && bugsGen.bugsCopulation(i) == true)
 				{
-					new thread(&liveTimer, newBug, ref(bugsGen));
-					//new thread(&BugsGen::CopulationTimer,bugsGen, newBug);
-					//new thread(&BugsGen::CopulationTimer,bugsGen, i);
-					//new thread(&BugsGen::CopulationTimer,bugsGen, );
+					for (int y = 1; y <= i->childrens;y++)
+					{
+						new thread(&liveTimer, bugsGen.Bugs.end()[-y], ref(bugsGen));
+					}
 				}
+				if (i != NULL)bugsGen.hungerBehaviour(mapGen, i);
 			}
-
 		}
 		Sleep(1);
 		locker.unlock();
@@ -89,7 +88,7 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 		if (certainBug->readyToCopulate == false)
 		{
 			certainBug->copulateSeconds++;
-			if (certainBug->copulateSeconds % 20 == 0)
+			if (certainBug->copulateSeconds % 5 == 0)
 			{
 				certainBug->readyToCopulate = true;
 			}

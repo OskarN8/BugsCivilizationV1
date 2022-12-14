@@ -15,8 +15,6 @@ void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 		Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50));
 		win.draw(Bugs[i]->sprite);
 
-
-
 	}
 }
 
@@ -67,7 +65,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 	if (certainBug->hunger < 0 && certainBug->hungerResistance == false)
 	{
 		bugsHungerDeath(certainBug);
-	    certainBug = NULL;
+	    
 	}
 
 	else if (certainBug->hunger < 80 && certainBug->hungerResistance == false)
@@ -88,10 +86,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 
 	}
-	if (certainBug->hunger < 80 && certainBug->age !=1)
-	{
-		certainBug->age = 1;
-	}
+
 
 
 
@@ -102,10 +97,11 @@ void BugsGen::bugsHungerDeath(BugsContent* certainBug)
 		Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug),Bugs.end());
 		certainBug = NULL;
 		delete certainBug;
+		
 
 }
 
-BugsContent* BugsGen::bugsCopulation(BugsContent* certainBug)
+bool BugsGen::bugsCopulation(BugsContent* certainBug)
 {
 	if (certainBug->readyToCopulate == true)
 	{
@@ -113,19 +109,20 @@ BugsContent* BugsGen::bugsCopulation(BugsContent* certainBug)
 		{
 			if (i != certainBug && certainBug->sprite.getGlobalBounds().intersects(i->sprite.getGlobalBounds()))
 			{
-				Bugs.push_back(new BugsContent(certainBug->pos.x, certainBug->pos.y));
 				certainBug->readyToCopulate = false;
 				i->readyToCopulate = false;
-				Bugs.back()->readyToCopulate = false;
-				//new thread(&CopulationTimer,this,certainBug);
-				//new thread(&BugsGen::CopulationTimer, this, i);
-				//new thread(&BugsGen::CopulationTimer, this, Bugs.back());
+				for (int y = 0;y < certainBug->childrens;y++)
+				{
+					Bugs.push_back(new BugsContent(certainBug->pos.x, certainBug->pos.y));
+					Bugs.back()->readyToCopulate = false;
+				}
 
-				return Bugs.back(); // do tworzenia watku liveTimer()
+
+				return true; // do tworzenia watku liveTimer()
 			}
 		}
 	}
-	return NULL;
+	return false;
 }
 
 
