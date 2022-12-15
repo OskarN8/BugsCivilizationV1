@@ -71,7 +71,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 	if (certainBug->hunger < 0 && certainBug->hungerResistance == false)
 	{
-		//bugsHungerDeath(certainBug);
+		bugsHungerDeath(certainBug);
 	    
 	}
 
@@ -104,8 +104,6 @@ void BugsGen::bugsHungerDeath(BugsContent* certainBug)
 		Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug),Bugs.end());
 		certainBug = NULL;
 		delete certainBug;
-		
-
 }
 
 bool BugsGen::bugsCopulation(BugsContent* certainBug)
@@ -123,13 +121,36 @@ bool BugsGen::bugsCopulation(BugsContent* certainBug)
 					Bugs.push_back(new BugsContent(certainBug->pos.x, certainBug->pos.y,txt));
 					Bugs.back()->readyToCopulate = false;
 				}
-
-
 				return true; // do tworzenia watku liveTimer()
 			}
 		}
 	}
 	return false;
+}
+
+void BugsGen::Growing(BugsContent* certainBug)
+{
+
+
+
+	if (certainBug->age == 0 && certainBug->lifeSeconds > 10)
+	{
+		certainBug->age++;
+		certainBug->sprite.scale(1.1f, 1.1f);
+		certainBug->sprite.setTextureRect(IntRect(0, 0, 60, 60));
+	}
+	else if (certainBug->age == 1 && certainBug->lifeSeconds > 15)
+	{
+		certainBug->age++;
+		certainBug->sprite.scale(1.2f, 1.2f);
+		certainBug->sprite.setTextureRect(IntRect(0, 0, 65, 65));
+	}
+	else if (certainBug->age == 2 && certainBug->lifeSeconds > 20)
+	{
+		certainBug->sprite.scale(1.3f, 1.3f);
+		certainBug->sprite.setTextureRect(IntRect(0, 0, 70, 70));
+		certainBug->maxAge = true;
+	}
 }
 
 

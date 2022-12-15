@@ -28,6 +28,7 @@ public:
 	bool bugsCopulation(BugsContent*);
 	void CopulationTimer(BugsContent*);
 	void LoadTextures();
+	void Growing(BugsContent*);
 
 };
 

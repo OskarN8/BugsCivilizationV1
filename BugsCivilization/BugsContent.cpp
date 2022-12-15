@@ -6,19 +6,22 @@ BugsContent::BugsContent(int x, int y,Texture txt)
 {
 	texture = txt;
 	pos = Vector2f(x,y);
-	size = 0;
+	age = 0;
+	maksAge = 3;
 	lifeSeconds = 0;
 	copulateSeconds = 0;
-	childrens = 5;
+	childrens = 1;
 	hunger = 100;
 	hungerResistance = false;
 	needNewEndPosition = true;
 	canCopulate = true;
 	readyToCopulate = false;
 	isAlive = true;
+	maxAge = false;
 	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, 50, 50));
 	sprite.setPosition(pos);
+	sprite.scale(0.8f, 0.8f);
 
 
 }

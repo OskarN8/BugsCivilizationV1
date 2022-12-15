@@ -18,8 +18,8 @@ public:
 	Sprite sprite;
 	Texture texture;
 	Vector2f pos, endPosition;
-	bool needNewEndPosition, hungerResistance, canCopulate,readyToCopulate, isAlive;
-	int   age=0, size, lifeSeconds, copulateSeconds, childrens;
+	bool maxAge, needNewEndPosition, hungerResistance, canCopulate,readyToCopulate, isAlive;
+	int   maksAge, age, lifeSeconds, copulateSeconds, childrens;
 	float hunger;
 	~BugsContent();
 	BugsContent(int,int,Texture);

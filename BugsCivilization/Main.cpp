@@ -15,6 +15,7 @@ int main()
 	mapGen.MapFirstDraw(window);
 	
 	bugsGen.bugsFirstDraw(window, howManyBugs);
+	window.setFramerateLimit(20);
 	
 	
 	for (BugsContent* i : bugsGen.Bugs)
@@ -76,17 +77,9 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 		Sleep(1000);
 		certainBug->lifeSeconds++;
 
-		if (certainBug->age == 0 && certainBug->lifeSeconds > 15)
+		if (certainBug->maxAge == false)
 		{
-			certainBug->age++;
-		}
-		else if (certainBug->age == 1 && certainBug->lifeSeconds > 30)
-		{
-			certainBug->age++;
-		}
-		else if (certainBug->age == 2 && certainBug->lifeSeconds > 45)
-		{
-			certainBug->age++;
+			bugsGen.Growing(certainBug);
 		}
 
 		if (certainBug->readyToCopulate == false)
@@ -97,7 +90,8 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 				certainBug->readyToCopulate = true;
 			}
 		}
-		else if (certainBug->lifeSeconds > 7)
+
+		else if (certainBug->lifeSeconds > 30)
 		{
 			cout << "Mamy 7 SEKUND | Robakow jest: "<< bugsGen.Bugs.size() << endl;
 			unique_lock<mutex> locker(mu);
