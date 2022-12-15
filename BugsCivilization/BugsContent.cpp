@@ -16,7 +16,7 @@ BugsContent::BugsContent(int x, int y,Texture txt)
 	canCopulate = true;
 	readyToCopulate = false;
 	isAlive = true;
-	sprite.setTexture(txt);
+	sprite.setTexture(texture);
 	sprite.setTextureRect(IntRect(0, 0, 50, 50));
 	sprite.setPosition(pos);
 

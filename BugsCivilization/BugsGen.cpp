@@ -1,6 +1,13 @@
 #include "BugsGen.h"
 
 
+void BugsGen::LoadTextures()
+{
+	if (!this->txt.loadFromFile("images/bug.png"))
+	{
+		cout << "COs nie tak" << endl;
+	}
+}
 
 void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 {
@@ -16,11 +23,6 @@ void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 		win.draw(Bugs[i]->sprite);
 
 	}
-}
-
-void BugsGen::LoadTextures()
-{
-	this->txt.loadFromFile("images/bug.png");
 }
 
 void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
@@ -69,7 +71,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 	if (certainBug->hunger < 0 && certainBug->hungerResistance == false)
 	{
-		bugsHungerDeath(certainBug);
+		//bugsHungerDeath(certainBug);
 	    
 	}
 

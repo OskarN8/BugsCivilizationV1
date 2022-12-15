@@ -52,9 +52,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\bug (1).png">
-      <Filter>images</Filter>
-    </Image>
     <Image Include="..\..\..\..\Desktop\bricks.jpg">
       <Filter>images</Filter>
     </Image>
@@ -62,6 +59,9 @@
       <Filter>images</Filter>
     </Image>
     <Image Include="images\robale.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\bug.png">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>

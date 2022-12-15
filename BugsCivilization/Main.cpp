@@ -10,9 +10,10 @@ int main()
 	BugsGen bugsGen;
 	howManyBugs = 5;
 	// <PART 1> - MAP AND BUGS FIST GENERATION
+	bugsGen.LoadTextures();
 	window.clear();
 	mapGen.MapFirstDraw(window);
-	bugsGen.LoadTextures();
+	
 	bugsGen.bugsFirstDraw(window, howManyBugs);
 	
 	
@@ -34,12 +35,14 @@ int main()
 				window.close();
 			}
 		}
+
 		unique_lock<mutex> locker(mu);
 		cout << "Zablokowany moment poruszania" << endl;
 		mapGen.MapDrawUpdate(window);
 		if (bugsGen.Bugs.size() > 0)
 		{
-			for (BugsContent* i : bugsGen.Bugs)
+			vector<BugsContent*> actualBugs = bugsGen.Bugs;
+			for (BugsContent* i : actualBugs)
 			{
 				
 				if(i!= NULL)bugsGen.movingPath(window, i);
