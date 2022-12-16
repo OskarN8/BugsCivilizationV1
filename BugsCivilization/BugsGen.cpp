@@ -3,10 +3,7 @@
 
 void BugsGen::LoadTextures()
 {
-	if (!this->txt.loadFromFile("images/bug.png"))
-	{
-		cout << "COs nie tak" << endl;
-	}
+	this->txt.loadFromFile("images/bug.png");
 }
 
 void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
@@ -131,25 +128,10 @@ bool BugsGen::bugsCopulation(BugsContent* certainBug)
 void BugsGen::Growing(BugsContent* certainBug)
 {
 
-
-
-	if (certainBug->age == 0 && certainBug->lifeSeconds > 10)
+	if (certainBug->maxAge != certainBug->age &&(certainBug->lifeSeconds > certainBug->age * 10))
 	{
 		certainBug->age++;
-		certainBug->sprite.scale(1.1f, 1.1f);
-		certainBug->sprite.setTextureRect(IntRect(0, 0, 60, 60));
-	}
-	else if (certainBug->age == 1 && certainBug->lifeSeconds > 15)
-	{
-		certainBug->age++;
-		certainBug->sprite.scale(1.2f, 1.2f);
-		certainBug->sprite.setTextureRect(IntRect(0, 0, 65, 65));
-	}
-	else if (certainBug->age == 2 && certainBug->lifeSeconds > 20)
-	{
-		certainBug->sprite.scale(1.3f, 1.3f);
-		certainBug->sprite.setTextureRect(IntRect(0, 0, 70, 70));
-		certainBug->maxAge = true;
+		certainBug->sprite.scale(certainBug->sprite.getScale().x + 0.25, certainBug->sprite.getScale().y + 0.25);
 	}
 }
 

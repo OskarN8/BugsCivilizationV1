@@ -1,6 +1,6 @@
 #include "Main.h"
 
-
+using namespace std;
 
 int main()
 {
@@ -8,6 +8,9 @@ int main()
 	RenderWindow window(VideoMode(500, 500), "Bugs Civilization!");
 	MapGen mapGen;
 	BugsGen bugsGen;
+
+	
+
 	howManyBugs = 5;
 	// <PART 1> - MAP AND BUGS FIST GENERATION
 	bugsGen.LoadTextures();
@@ -16,6 +19,10 @@ int main()
 	
 	bugsGen.bugsFirstDraw(window, howManyBugs);
 	window.setFramerateLimit(20);
+
+	Button btn("btn");
+	btn.SetPos(450, 450);
+	btn.Draw(window);
 	
 	
 	for (BugsContent* i : bugsGen.Bugs)
@@ -31,15 +38,19 @@ int main()
 		Event event;
 		if (window.pollEvent(event))
 		{
-			if (event.type == Event::Closed)
+			switch (event.type) 
 			{
-				window.close();
+			case Event::Closed:
+					window.close();
+			case Event::MouseMoved:
+				btn.Hover(window);
 			}
 		}
 
 		unique_lock<mutex> locker(mu);
 		cout << "Zablokowany moment poruszania" << endl;
 		mapGen.MapDrawUpdate(window);
+		btn.Draw(window);
 		if (bugsGen.Bugs.size() > 0)
 		{
 			vector<BugsContent*> actualBugs = bugsGen.Bugs;
@@ -77,10 +88,7 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 		Sleep(1000);
 		certainBug->lifeSeconds++;
 
-		if (certainBug->maxAge == false)
-		{
-			bugsGen.Growing(certainBug);
-		}
+		bugsGen.Growing(certainBug);
 
 		if (certainBug->readyToCopulate == false)
 		{

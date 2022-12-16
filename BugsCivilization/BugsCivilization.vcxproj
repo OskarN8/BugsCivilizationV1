@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="BugsContent.h" />
     <ClInclude Include="BugsGen.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MapBlock.h" />
     <ClInclude Include="MapGen.h" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="BugsContent.cpp" />
     <ClCompile Include="BugsGen.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapBlock.cpp" />
     <ClCompile Include="MapGen.cpp" />
@@ -155,6 +157,7 @@
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\bricks.jpg" />
     <Image Include="..\..\..\..\Desktop\lava.jpg" />
+    <Image Include="images\btn.png" />
     <Image Include="images\bug.png" />
     <Image Include="images\robale.png" />
   </ItemGroup>

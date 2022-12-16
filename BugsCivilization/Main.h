@@ -3,10 +3,12 @@
 #include "MapBlock.h"
 #include "MapGen.h"
 #include "BugsGen.h"
+#include "Button.h"
 #include <time.h>
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
+
 
 int howManyBugs;
 mutex mu;
