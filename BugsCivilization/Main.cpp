@@ -9,22 +9,22 @@ int main()
 	MapGen mapGen;
 	BugsGen bugsGen;
 
-	
+
 
 	howManyBugs = 5;
 	// <PART 1> - MAP AND BUGS FIST GENERATION
 	bugsGen.LoadTextures();
 	window.clear();
 	mapGen.MapFirstDraw(window);
-	
+
 	bugsGen.bugsFirstDraw(window, howManyBugs);
 	window.setFramerateLimit(20);
 
-	Button btn("btn");
+	Button btn("btn", "children");
 	btn.SetPos(450, 450);
 	btn.Draw(window);
-	
-	
+
+
 	for (BugsContent* i : bugsGen.Bugs)
 	{
 		new thread(&liveTimer, i, ref(bugsGen));
@@ -38,12 +38,28 @@ int main()
 		Event event;
 		if (window.pollEvent(event))
 		{
-			switch (event.type) 
+			switch (event.type)
 			{
 			case Event::Closed:
-					window.close();
+				window.close();
+			case Event::MouseButtonPressed:
+				if (event.mouseButton.button == sf::Mouse::Left)
+				
+				{
+					if (btn.Hover(window))
+					{
+						btn.EditUp(bugsGen);
+					}
+				}
 			case Event::MouseMoved:
-				btn.Hover(window);
+				if (btn.Hover(window))
+				{
+					btn.sprite.setColor(Color::Green);
+				}
+				else
+				{
+					btn.sprite.setColor(Color::White);
+				}
 			}
 		}
 
@@ -56,13 +72,13 @@ int main()
 			vector<BugsContent*> actualBugs = bugsGen.Bugs;
 			for (BugsContent* i : actualBugs)
 			{
-				
-				if(i!= NULL)bugsGen.movingPath(window, i);
-				
 
-				if(i != NULL && bugsGen.bugsCopulation(i) == true)
+				if (i != NULL)bugsGen.movingPath(window, i);
+
+
+				if (i != NULL && bugsGen.bugsCopulation(i) == true)
 				{
-					for (int y = 1; y <= i->childrens;y++)
+					for (int y = 1; y <= i->children;y++)
 					{
 						new thread(&liveTimer, bugsGen.Bugs.end()[-y], ref(bugsGen));
 					}
@@ -101,7 +117,7 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 
 		else if (certainBug->lifeSeconds > 30)
 		{
-			cout << "Mamy 7 SEKUND | Robakow jest: "<< bugsGen.Bugs.size() << endl;
+			cout << "Mamy 7 SEKUND | Robakow jest: " << bugsGen.Bugs.size() << endl;
 			unique_lock<mutex> locker(mu);
 			cout << "Locker zamkniety" << endl;
 			cond.wait(locker);
@@ -110,9 +126,9 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 			bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
 			certainBug = NULL;
 			delete certainBug;
-			
-			cout << "Robak usuniety, jest ich: "<<bugsGen.Bugs.size() << endl;
-			
+
+			cout << "Robak usuniety, jest ich: " << bugsGen.Bugs.size() << endl;
+
 			break;
 
 		}

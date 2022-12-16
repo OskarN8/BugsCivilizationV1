@@ -113,7 +113,7 @@ bool BugsGen::bugsCopulation(BugsContent* certainBug)
 			{
 				certainBug->readyToCopulate = false;
 				i->readyToCopulate = false;
-				for (int y = 0;y < certainBug->childrens;y++)
+				for (int y = 0;y < certainBug->children;y++)
 				{
 					Bugs.push_back(new BugsContent(certainBug->pos.x, certainBug->pos.y,txt));
 					Bugs.back()->readyToCopulate = false;

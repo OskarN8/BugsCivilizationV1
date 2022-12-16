@@ -10,7 +10,7 @@ BugsContent::BugsContent(int x, int y,Texture txt)
 	maxAge = 3;
 	lifeSeconds = 0;
 	copulateSeconds = 0;
-	childrens = 1;
+	children = 1;
 	hunger = 100;
 	hungerResistance = false;
 	needNewEndPosition = true;
@@ -21,11 +21,7 @@ BugsContent::BugsContent(int x, int y,Texture txt)
 	sprite.setTextureRect(IntRect(0, 0, 50, 50));
 	sprite.setPosition(pos);
 	sprite.setScale(0.8f, 0.8f);
-
-
 }
-
-
 
 BugsContent::~BugsContent()
 {
