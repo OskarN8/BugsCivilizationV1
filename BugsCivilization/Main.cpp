@@ -48,7 +48,15 @@ int main()
 				{
 					if (btn.Hover(window))
 					{
-						btn.EditUp(bugsGen);
+						btn.EditUp(bugsGen, mapGen);
+					}
+				}
+				else if (event.mouseButton.button == sf::Mouse::Right)
+
+				{
+					if (btn.Hover(window))
+					{
+						btn.EditDown(bugsGen,mapGen);
 					}
 				}
 			case Event::MouseMoved:
@@ -115,18 +123,14 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 			}
 		}
 
-		else if (certainBug->lifeSeconds > 30)
+		else if (certainBug->lifeSeconds > certainBug->maxLifeSeconds)
 		{
 			cout << "Mamy 7 SEKUND | Robakow jest: " << bugsGen.Bugs.size() << endl;
 			unique_lock<mutex> locker(mu);
 			cout << "Locker zamkniety" << endl;
 			cond.wait(locker);
 			cout << "Warunek odebrany USUWAMY" << endl;
-			certainBug->isAlive = false;
-			bugsGen.Bugs.erase(remove(bugsGen.Bugs.begin(), bugsGen.Bugs.end(), certainBug), bugsGen.Bugs.end());
-			certainBug = NULL;
-			delete certainBug;
-
+			bugsGen.OldDeath(certainBug);
 			cout << "Robak usuniety, jest ich: " << bugsGen.Bugs.size() << endl;
 
 			break;

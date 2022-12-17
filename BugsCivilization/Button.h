@@ -3,6 +3,7 @@
 #include <iostream>
 #include "BugsGen.h"
 
+
 using namespace sf;
 using namespace std;
 
@@ -20,12 +21,8 @@ public:
 	void Click();
 	void LoadTexture(string name);
 	void Draw(RenderWindow&);
-	void EditUp(BugsGen&);
-	void EditUp(int);
-	void EditUp(bool);
-	void EditDown(BugsGen&);
-	void EditDown(int);
-	void EditDown(bool);
+	void EditUp(BugsGen&, MapGen&);
+	void EditDown(BugsGen&, MapGen&);
 
 };
 

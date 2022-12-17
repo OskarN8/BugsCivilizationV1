@@ -19,7 +19,7 @@ public:
 	Texture texture;
 	Vector2f pos, endPosition;
 	bool  needNewEndPosition, hungerResistance, canCopulate,readyToCopulate, isAlive;
-	int   maxAge, age, lifeSeconds, copulateSeconds, children;
+	int   maxLifeSeconds, maxAge, age, lifeSeconds, copulateSeconds, children;
 	float hunger;
 	~BugsContent();
 	BugsContent(int,int,Texture);

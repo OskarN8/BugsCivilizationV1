@@ -8,6 +8,7 @@ MapBlock::MapBlock(float x, float y)
 	setSprite();
 	pos = Vector2f(x, y);
 	sprite.setPosition(pos);
+	renewSeconds = 30;
 	
 
 }
@@ -37,7 +38,7 @@ void MapBlock::setSprite()
 
 void MapBlock::renewTimer()
 {
-	Sleep(30000);
+	Sleep(renewSeconds*1000);
 	sprite.setTexture(textureLava);
 
 }

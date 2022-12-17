@@ -68,7 +68,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 	if (certainBug->hunger < 0 && certainBug->hungerResistance == false)
 	{
-		bugsHungerDeath(certainBug);
+		HungerDeath(certainBug);
 	    
 	}
 
@@ -96,11 +96,19 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 }
 
-void BugsGen::bugsHungerDeath(BugsContent* certainBug)
+void BugsGen::HungerDeath(BugsContent* certainBug)
 {
 		Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug),Bugs.end());
 		certainBug = NULL;
 		delete certainBug;
+}
+
+void BugsGen::OldDeath(BugsContent* certainBug)
+{
+	certainBug->isAlive = false;
+	Bugs.erase(remove(Bugs.begin(), Bugs.end(), certainBug), Bugs.end());
+	certainBug = NULL;
+	delete certainBug;
 }
 
 bool BugsGen::bugsCopulation(BugsContent* certainBug)

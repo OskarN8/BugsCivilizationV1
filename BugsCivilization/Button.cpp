@@ -35,7 +35,7 @@ bool Button::Hover(RenderWindow& win)
 	}
 	return false;
 }
-void Button::EditUp(BugsGen& bugsGen)
+void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen)
 {
 	if (varName == "children")
 	{
@@ -45,7 +45,81 @@ void Button::EditUp(BugsGen& bugsGen)
 			i->children++;
 		}
 	}
-
-
+	else if (varName == "hungerResistance")
+	{
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			i->hungerResistance = true;
+		}
+	}
+	else if (varName == "maxAge")
+	{
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			i->maxAge++;
+		}
+	}
+	else if (varName == "canCopulate")
+	{
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			i->canCopulate = true;
+		}
+	}
+	else if (varName == "maxLifeSeconds")
+	{
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			i->maxLifeSeconds++;
+		}
+	}
+	else if (varName == "renewSeconds")
+	{
+		for (MapBlock* i : mapGen.Blocks)
+		{
+			i->renewSeconds++;
+		}
+	}
 }
+
+void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen)
+{
+	if (varName == "children")
+	{
+		//vector<BugsContent*> tmp = bugsGen.Bugs;
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			if(i->children > 0) i->children--;
+		}
+	}
+	else if (varName == "hungerResistance")
+	{
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			i->hungerResistance = false;
+		}
+	}
+	else if (varName == "maxAge")
+	{
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			if (i->maxAge > 0) i->maxAge--;
+		}
+	}
+	else if (varName == "maxLifeSeconds")
+	{
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			if (i->maxLifeSeconds > 1) i->maxLifeSeconds--;
+		}
+	}
+	else if (varName == "renewSeconds")
+	{
+		for (MapBlock* i : mapGen.Blocks)
+		{
+			if (i->renewSeconds > 1) i->renewSeconds--;
+		}
+	}
+}
+
 

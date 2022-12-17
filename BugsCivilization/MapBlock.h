@@ -14,6 +14,7 @@ public:
 	Vector2f pos;
 	Texture textureLava, textureBricks;
 	Sprite sprite;
+	int renewSeconds;
 	MapBlock( float, float);
 	void setSprite();
 	void loadTextures();

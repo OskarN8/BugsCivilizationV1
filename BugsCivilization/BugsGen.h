@@ -24,7 +24,8 @@ public:
 	void bugsFirstDraw(RenderWindow&, int);
 	void movingPath(RenderWindow&, BugsContent*);
 	void hungerBehaviour(MapGen&, BugsContent*);
-	void bugsHungerDeath(BugsContent*);
+	void HungerDeath(BugsContent*);
+	void OldDeath(BugsContent*);
 	bool bugsCopulation(BugsContent*);
 	void CopulationTimer(BugsContent*);
 	void LoadTextures();
