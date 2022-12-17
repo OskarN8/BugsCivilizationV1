@@ -84,7 +84,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 
 			gen.MapBlocks2D[(rowY / 50)][(rowX / 50)]->isFull = false;
 			gen.MapBlocks2D[(rowY / 50)][(rowX / 50)]->setSprite();
-			new thread(&MapBlock::renewTimer, gen.MapBlocks2D[(rowY / 50)][(rowX / 50)]);
+			new thread(&MapBlock::renewTimer, gen.MapBlocks2D[(rowX / 50)][(rowY / 50)]);
 			certainBug->hunger += 10;
 		}
 

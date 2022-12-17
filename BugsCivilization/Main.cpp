@@ -96,7 +96,27 @@ int main()
 				{
 					if (btnChildren.Hover(window))
 					{
-						btnChildren.EditDown(bugsGen,mapGen);
+						btnChildren.EditDown(bugsGen, mapGen);
+					}
+					if (btnResistance.Hover(window))
+					{
+						btnResistance.EditDown(bugsGen, mapGen);
+					}
+					if (btnMaxAge.Hover(window))
+					{
+						btnMaxAge.EditDown(bugsGen, mapGen);
+					}
+					if (btnMaxCanCopulateSeconds.Hover(window))
+					{
+						btnMaxCanCopulateSeconds.EditDown(bugsGen, mapGen);
+					}
+					if (btnMaxLifeSeconds.Hover(window))
+					{
+						btnMaxLifeSeconds.EditDown(bugsGen, mapGen);
+					}
+					if (btnRenewSeconds.Hover(window))
+					{
+						btnRenewSeconds.EditDown(bugsGen, mapGen);
 					}
 				}
 			case Event::MouseMoved:
