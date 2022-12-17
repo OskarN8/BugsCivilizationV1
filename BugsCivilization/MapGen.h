@@ -17,6 +17,8 @@ class MapGen
 	int Fx, Fy;
 public:
 	int gridLength = 10;
+	int gridLengthX = 12;
+	int gridLengthY = 9;
 	int counter = 0;
 	vector<MapBlock*> Blocks;
 	vector<vector<MapBlock*>> MapBlocks2D;

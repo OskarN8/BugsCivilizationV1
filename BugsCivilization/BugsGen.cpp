@@ -30,8 +30,8 @@ void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
 
 		default_random_engine gen(time(NULL) + rand());
 
-		uniform_int_distribution<int> dirX(50, 450);
-		uniform_int_distribution<int> dirY(50, 450);
+		uniform_int_distribution<int> dirX(50, 500);
+		uniform_int_distribution<int> dirY(50, 400);
 
 
 		certainBug->needNewEndPosition = false;

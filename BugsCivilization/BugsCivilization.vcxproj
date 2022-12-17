@@ -159,6 +159,12 @@
     <Image Include="..\..\..\..\Desktop\lava.jpg" />
     <Image Include="images\btn.png" />
     <Image Include="images\bug.png" />
+    <Image Include="images\children.png" />
+    <Image Include="images\floorrenew.png" />
+    <Image Include="images\livetimer.png" />
+    <Image Include="images\maxage.png" />
+    <Image Include="images\maxcopulate.png" />
+    <Image Include="images\resistance.png" />
     <Image Include="images\robale.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

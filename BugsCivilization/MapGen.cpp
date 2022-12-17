@@ -3,9 +3,9 @@
 
 void MapGen::MapFirstDraw(RenderWindow& win)
 {
-	for (int y = 0; y < gridLength; y++)
+	for (int y = 0; y < gridLengthY; y++)
 	{
-		for (int x = 0; x < gridLength; x++)
+		for (int x = 0; x < gridLengthX; x++)
 		{
 			Blocks.push_back(new MapBlock(x * 50, y * 50));
 			win.draw(Blocks[counter]->sprite);
@@ -19,11 +19,11 @@ void MapGen::MapFirstDraw(RenderWindow& win)
 
 void MapGen::MapDrawUpdate(RenderWindow& win)
 {
-	for (int y = 0; y < gridLength; y++)
+	for (int y = 0; y < gridLengthY; y++)
 	{
-		for (int x = 0; x < gridLength; x++)
+		for (int x = 0; x < gridLengthX; x++)
 		{
-			win.draw(MapBlocks2D[x][y]->sprite);
+			win.draw(MapBlocks2D[y][x]->sprite);
 		}
 	}
 }

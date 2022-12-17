@@ -11,6 +11,7 @@ BugsContent::BugsContent(int x, int y,Texture txt)
 	lifeSeconds = 0;
 	maxLifeSeconds = 20;
 	copulateSeconds = 0;
+	maxCanCopulateSeconds = 60;
 	children = 1;
 	hunger = 100;
 	hungerResistance = false;

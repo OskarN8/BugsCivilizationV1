@@ -73,5 +73,23 @@
     <Image Include="images\btn.png">
       <Filter>images</Filter>
     </Image>
+    <Image Include="images\maxcopulate.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\maxage.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\floorrenew.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\resistance.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\children.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\livetimer.png">
+      <Filter>images</Filter>
+    </Image>
   </ItemGroup>
 </Project>

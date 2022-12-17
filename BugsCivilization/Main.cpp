@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
 
-	RenderWindow window(VideoMode(500, 500), "Bugs Civilization!");
+	RenderWindow window(VideoMode(600, 500), "Bugs Civilization!");
 	MapGen mapGen;
 	BugsGen bugsGen;
 
@@ -20,9 +20,27 @@ int main()
 	bugsGen.bugsFirstDraw(window, howManyBugs);
 	window.setFramerateLimit(20);
 
-	Button btn("btn", "children");
-	btn.SetPos(450, 450);
-	btn.Draw(window);
+	Button btnChildren("children", "children");
+	Button btnResistance("resistance", "hungerResistance");
+	Button btnMaxAge("maxage", "maxAge");
+	Button btnMaxCanCopulateSeconds("maxcopulate", "maxCanCopulateSeconds");
+	Button btnMaxLifeSeconds("livetimer", "maxLifeSeconds");
+	Button btnRenewSeconds("floorrenew", "renewSeconds");
+
+	btnChildren.SetPos(0, 450);
+	btnResistance.SetPos(100, 450);
+	btnMaxAge.SetPos(200, 450);
+	btnMaxCanCopulateSeconds.SetPos(300, 450);
+	btnMaxLifeSeconds.SetPos(400, 450);
+	btnRenewSeconds.SetPos(500, 450);
+
+	btnChildren.Draw(window);
+	btnResistance.Draw(window);
+	btnMaxAge.Draw(window);
+	btnMaxCanCopulateSeconds.Draw(window);
+	btnMaxLifeSeconds.Draw(window);
+	btnRenewSeconds.Draw(window);
+
 
 
 	for (BugsContent* i : bugsGen.Bugs)
@@ -46,44 +64,117 @@ int main()
 				if (event.mouseButton.button == sf::Mouse::Left)
 				
 				{
-					if (btn.Hover(window))
+
+					if (btnChildren.Hover(window))
 					{
-						btn.EditUp(bugsGen, mapGen);
+						btnChildren.EditUp(bugsGen, mapGen);
 					}
+					if (btnResistance.Hover(window))
+					{
+						btnResistance.EditUp(bugsGen, mapGen);
+					}
+					if (btnMaxAge.Hover(window))
+					{
+						btnMaxAge.EditUp(bugsGen, mapGen);
+					}
+					if (btnMaxCanCopulateSeconds.Hover(window))
+					{
+						btnMaxCanCopulateSeconds.EditUp(bugsGen, mapGen);
+					}
+					if (btnMaxLifeSeconds.Hover(window))
+					{
+						btnMaxLifeSeconds.EditUp(bugsGen, mapGen);
+					}
+					if (btnRenewSeconds.Hover(window))
+					{
+						btnRenewSeconds.EditUp(bugsGen, mapGen);
+					}
+
 				}
 				else if (event.mouseButton.button == sf::Mouse::Right)
 
 				{
-					if (btn.Hover(window))
+					if (btnChildren.Hover(window))
 					{
-						btn.EditDown(bugsGen,mapGen);
+						btnChildren.EditDown(bugsGen,mapGen);
 					}
 				}
 			case Event::MouseMoved:
-				if (btn.Hover(window))
+				
+				if (btnChildren.Hover(window))
 				{
-					btn.sprite.setColor(Color::Green);
+					btnChildren.sprite.setColor(Color::Green);
 				}
 				else
 				{
-					btn.sprite.setColor(Color::White);
+					btnChildren.sprite.setColor(Color::White);
 				}
+
+				if (btnResistance.Hover(window))
+				{
+					btnResistance.sprite.setColor(Color::Green);
+				}
+				else
+				{
+					btnResistance.sprite.setColor(Color::White);
+				}
+
+				if (btnMaxAge.Hover(window))
+				{
+					btnMaxAge.sprite.setColor(Color::Green);
+				}
+				else
+				{
+					btnMaxAge.sprite.setColor(Color::White);
+				}
+
+				if (btnMaxCanCopulateSeconds.Hover(window))
+				{
+					btnMaxCanCopulateSeconds.sprite.setColor(Color::Green);
+				}
+				else
+				{
+					btnMaxCanCopulateSeconds.sprite.setColor(Color::White);
+				}
+
+				if (btnMaxLifeSeconds.Hover(window))
+				{
+					btnMaxLifeSeconds.sprite.setColor(Color::Green);
+				}
+				else
+				{
+					btnMaxLifeSeconds.sprite.setColor(Color::White);
+				}
+
+				if (btnRenewSeconds.Hover(window))
+				{
+					btnRenewSeconds.sprite.setColor(Color::Green);
+				}
+				else
+				{
+					btnRenewSeconds.sprite.setColor(Color::White);
+				}
+
 			}
 		}
 
 		unique_lock<mutex> locker(mu);
 		cout << "Zablokowany moment poruszania" << endl;
 		mapGen.MapDrawUpdate(window);
-		btn.Draw(window);
+
+		btnChildren.Draw(window);
+		btnResistance.Draw(window);
+		btnMaxAge.Draw(window);
+		btnMaxCanCopulateSeconds.Draw(window);
+		btnMaxLifeSeconds.Draw(window);
+		btnRenewSeconds.Draw(window);
+
 		if (bugsGen.Bugs.size() > 0)
 		{
 			vector<BugsContent*> actualBugs = bugsGen.Bugs;
 			for (BugsContent* i : actualBugs)
 			{
-
 				if (i != NULL)bugsGen.movingPath(window, i);
-
-
 				if (i != NULL && bugsGen.bugsCopulation(i) == true)
 				{
 					for (int y = 1; y <= i->children;y++)
@@ -114,7 +205,7 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 
 		bugsGen.Growing(certainBug);
 
-		if (certainBug->readyToCopulate == false)
+		if (certainBug->readyToCopulate == false && certainBug->lifeSeconds < certainBug->maxCanCopulateSeconds)
 		{
 			certainBug->copulateSeconds++;
 			if (certainBug->copulateSeconds % 5 == 0)

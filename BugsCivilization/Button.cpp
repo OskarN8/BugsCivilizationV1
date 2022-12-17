@@ -59,11 +59,11 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen)
 			i->maxAge++;
 		}
 	}
-	else if (varName == "canCopulate")
+	else if (varName == "maxCanCopulateSeconds")
 	{
 		for (BugsContent* i : bugsGen.Bugs)
 		{
-			i->canCopulate = true;
+			i->maxCanCopulateSeconds++;
 		}
 	}
 	else if (varName == "maxLifeSeconds")
@@ -104,6 +104,13 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen)
 		for (BugsContent* i : bugsGen.Bugs)
 		{
 			if (i->maxAge > 0) i->maxAge--;
+		}
+	}
+	else if (varName == "maxCanCopulateSeconds")
+	{
+		for (BugsContent* i : bugsGen.Bugs)
+		{
+			if(i->maxCanCopulateSeconds>0) i->maxCanCopulateSeconds--;
 		}
 	}
 	else if (varName == "maxLifeSeconds")
