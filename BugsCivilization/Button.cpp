@@ -75,9 +75,11 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen)
 	}
 	else if (varName == "renewSeconds")
 	{
-		for (MapBlock* i : mapGen.Blocks)
+
+		for (vector<MapBlock*> i : mapGen.MapBlocks2D)
 		{
-			i->renewSeconds++;
+			for (MapBlock* z : i)
+				z->renewSeconds++;
 		}
 	}
 }
@@ -122,9 +124,11 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen)
 	}
 	else if (varName == "renewSeconds")
 	{
-		for (MapBlock* i : mapGen.Blocks)
+		
+		for (vector<MapBlock*> i : mapGen.MapBlocks2D)
 		{
-			if (i->renewSeconds > 1) i->renewSeconds--;
+			for(MapBlock* z : i)
+			if (z->renewSeconds > 1) z->renewSeconds--;
 		}
 	}
 }
