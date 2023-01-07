@@ -20,6 +20,7 @@ public:
 	int gridLengthX = 12;
 	int gridLengthY = 12;
 	int counter = 0;
+
 	vector<MapBlock*> Blocks;
 	vector<vector<MapBlock*>> MapBlocks2D;
 

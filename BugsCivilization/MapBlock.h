@@ -10,7 +10,7 @@ using namespace std;
 class MapBlock
 {
 public:
-	bool isFull;
+	bool isFull,isRenewed;
 	Vector2f pos;
 	Texture textureLava, textureBricks;
 	Sprite sprite;

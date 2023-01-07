@@ -5,14 +5,15 @@ using namespace std;
 int main()
 {
 
+	// <PART 0> - OBJECTS CREATING AND SETTING STARTING VALUES
+
 	RenderWindow window(VideoMode(600, 500), "Bugs Civilization!");
 	MapGen mapGen;
 	BugsGen bugsGen;
+	howManyBugs = 3;
 
+	// <PART 1> - MAP AND BUGS FIST GENERATION + BUTTONS LOADING
 
-
-	howManyBugs = 5;
-	// <PART 1> - MAP AND BUGS FIST GENERATION
 	bugsGen.LoadTextures();
 	window.clear();
 	mapGen.MapFirstDraw(window);
@@ -41,15 +42,12 @@ int main()
 	btnMaxLifeSeconds.Draw(window);
 	btnRenewSeconds.Draw(window);
 
-
-
 	for (BugsContent* i : bugsGen.Bugs)
 	{
 		new thread(&liveTimer, i, ref(bugsGen));
-		//new thread(&BugsGen::CopulationTimer, bugsGen, i);
-
 	}
-	// <END PART1>
+
+	// <PART 2> - CIVILIZATION WINDOW MAIN LOOP
 
 	while (window.isOpen())
 	{
@@ -179,7 +177,7 @@ int main()
 		}
 
 		unique_lock<mutex> locker(mu);
-		cout << "Zablokowany moment poruszania" << endl;
+		//cout << "Zablokowany moment poruszania" << endl;
 		mapGen.MapDrawUpdate(window);
 
 		btnChildren.Draw(window);
@@ -208,7 +206,7 @@ int main()
 		Sleep(1);
 		locker.unlock();
 		cond.notify_all();
-		cout << "Odblokowany moment poruszania" << endl;
+		//cout << "Odblokowany moment poruszania" << endl;
 		window.display();
 	}
 	return 0;
@@ -219,7 +217,6 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 
 	while (certainBug->isAlive == true)
 	{
-
 		Sleep(1000);
 		certainBug->lifeSeconds++;
 
@@ -228,7 +225,7 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 		if (certainBug->readyToCopulate == false && certainBug->lifeSeconds < certainBug->maxCanCopulateSeconds)
 		{
 			certainBug->copulateSeconds++;
-			if (certainBug->copulateSeconds % 5 == 0)
+			if (certainBug->copulateSeconds % 10 == 0)
 			{
 				certainBug->readyToCopulate = true;
 			}
