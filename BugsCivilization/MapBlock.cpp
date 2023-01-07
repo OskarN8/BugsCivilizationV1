@@ -9,8 +9,6 @@ MapBlock::MapBlock(float x, float y)
 	pos = Vector2f(x, y);
 	sprite.setPosition(pos);
 	renewSeconds = 30;
-	
-
 }
 
 void MapBlock::loadTextures()
@@ -24,21 +22,15 @@ void MapBlock::setSprite()
 	if (isFull == true)
 	{
 		sprite.setTexture(textureLava);
-
 	}
 	else
 	{
 		sprite.setTexture(textureBricks);
-
 	}
-	//sprite.setTextureRect(IntRect(0, 0, 50, 50));
-
 }
-
 
 void MapBlock::renewTimer()
 {
 	Sleep(renewSeconds*1000);
 	sprite.setTexture(textureLava);
-
 }

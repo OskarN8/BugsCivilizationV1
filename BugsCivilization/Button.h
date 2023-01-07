@@ -13,12 +13,10 @@ public:
 	Texture txt;
 	Sprite sprite;
 	FloatRect bounds;
-	FloatRect mousePoint;
+	string varName;
 	Button(string,string);
 	void SetPos(float, float);
-	string varName;
 	bool Hover(RenderWindow&);
-	void Click();
 	void LoadTexture(string name);
 	void Draw(RenderWindow&);
 	void EditUp(BugsGen&, MapGen&);

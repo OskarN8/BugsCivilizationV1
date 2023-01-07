@@ -27,10 +27,8 @@ public:
 	void HungerDeath(BugsContent*);
 	void OldDeath(BugsContent*);
 	bool bugsCopulation(BugsContent*);
-	void CopulationTimer(BugsContent*);
 	void LoadTextures();
 	void Growing(BugsContent*);
-
 };
 
 #endif

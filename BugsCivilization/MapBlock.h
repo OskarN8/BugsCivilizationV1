@@ -10,7 +10,7 @@ using namespace std;
 class MapBlock
 {
 public:
-	bool isFull,isRenewed;
+	bool isFull;
 	Vector2f pos;
 	Texture textureLava, textureBricks;
 	Sprite sprite;
@@ -19,34 +19,5 @@ public:
 	void setSprite();
 	void loadTextures();
 	void renewTimer();
-
-
-
 };
 #endif
-
-/*
-#ifndef MAINMAP_H
-#define MAINMAP_H
-
-#include <SFML/Graphics.hpp>
-#include "AppTile.h"
-#include <vector>
-
-class MainMap
-{
-	vector<Vector2i>bugsPosiotions;
-	void setUpInitialState();
-	void setUpBugsPositions();
-	void setUpTiles();
-
-public:
-	vector<vector<AppTile*> > tiles;
-	int gridLength;
-	MainMap();
-
-
-};
-
-#endif 
-*/

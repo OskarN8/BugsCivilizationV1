@@ -27,7 +27,6 @@ BugsContent::BugsContent(int x, int y,Texture txt)
 
 BugsContent::~BugsContent()
 {
-	cout << "Robal usuniety" << endl;
 }
 
 
