@@ -13,9 +13,9 @@ void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
 
 	for (int i = 0; i < howMany; i++)
 	{
-		uniform_int_distribution<int> distX(1, 4);
-		uniform_int_distribution<int> distY(1, 4);
-		Bugs.push_back(new BugsContent(distX(gen) * 50, distY(gen) * 50,txt));
+		uniform_int_distribution<int> distX(1, win.getSize().x);
+		uniform_int_distribution<int> distY(1, win.getSize().y);
+		Bugs.push_back(new BugsContent(distX(gen)-50, distY(gen)-50,txt));
 		win.draw(Bugs[i]->sprite);
 	}
 }
@@ -27,8 +27,8 @@ void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
 	{
 		default_random_engine gen(time(NULL) + rand());
 
-		uniform_int_distribution<int> dirX(50, 500);
-		uniform_int_distribution<int> dirY(50, 400);
+		uniform_int_distribution<int> dirX(25, win.getSize().x-50);
+		uniform_int_distribution<int> dirY(25, win.getSize().y-50);
 
 		certainBug->needNewEndPosition = false;
 		certainBug->endPosition = Vector2f(int(dirX(gen)), int(dirY(gen)));
@@ -48,21 +48,30 @@ void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
 	else if (certainBug->pos == certainBug->endPosition)
 	{
 		certainBug->needNewEndPosition = true;
+		
 	}
 	}
 
 
 void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 {
-	certainBug->hunger -= 0.1;
+	certainBug->hunger -= 0.5;
 	//cout << certainBug->hunger << endl;
 
 	if (certainBug->hunger < 0 && certainBug->hungerResistance == false)
 	{
+		cout << certainBug->hunger << endl;
 		HungerDeath(certainBug);
 	}
-
-	else if (certainBug->hunger < 80 && certainBug->hungerResistance == false)
+	if (certainBug->hunger < 30)
+	{
+		certainBug->sprite.setColor(Color::Red);
+	}
+	else
+	{
+		certainBug->sprite.setColor(Color::White);
+	}
+	if (certainBug->hunger < 80 && certainBug->hungerResistance == false)
 	{
 		int rowX = (certainBug->pos.x + 25) / 100;
 		int rowY = (certainBug->pos.y + 25) / 100;
@@ -76,7 +85,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 			gen.MapBlocks2D[(rowY / 50)][(rowX / 50)]->isFull = false;
 			gen.MapBlocks2D[(rowY / 50)][(rowX / 50)]->setSprite();
 			new thread(&MapBlock::renewTimer, gen.MapBlocks2D[(rowY / 50)][(rowX / 50)]);
-			certainBug->hunger += 10;
+			certainBug->hunger += 20;
 		}
 	}
 }
@@ -98,7 +107,7 @@ void BugsGen::OldDeath(BugsContent* certainBug)
 
 bool BugsGen::bugsCopulation(BugsContent* certainBug)
 {
-	if (certainBug->readyToCopulate == true)
+	if (certainBug->readyToCopulate == true && Bugs.size()<1000)
 	{
 		for (BugsContent* i : Bugs)
 		{
@@ -110,7 +119,9 @@ bool BugsGen::bugsCopulation(BugsContent* certainBug)
 				{
 					Bugs.push_back(new BugsContent(certainBug->pos.x, certainBug->pos.y,txt));
 					Bugs.back()->readyToCopulate = false;
+					
 				}
+				cout << Bugs.size() << endl;
 				return true;
 			}
 		}

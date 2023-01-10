@@ -9,7 +9,7 @@ BugsContent::BugsContent(int x, int y,Texture txt)
 	age = 0;
 	maxAge = 3;
 	lifeSeconds = 0;
-	maxLifeSeconds = 20;
+	maxLifeSeconds = 30;
 	copulateSeconds = 0;
 	maxCanCopulateSeconds = 60;
 	children = 1;

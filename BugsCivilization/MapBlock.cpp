@@ -33,4 +33,5 @@ void MapBlock::renewTimer()
 {
 	Sleep(renewSeconds*1000);
 	sprite.setTexture(textureLava);
+	isFull = true;
 }

@@ -7,10 +7,14 @@ int main()
 
 	// <PART 0> - OBJECTS CREATING AND SETTING STARTING VALUES
 
-	RenderWindow window(VideoMode(600, 500), "Bugs Civilization!");
+	RenderWindow window(VideoMode(1000, 1000), "Bugs Civilization!");
 	MapGen mapGen;
+	mapGen.gridLengthX = 20;
+	mapGen.gridLengthY = 20;
+	Counter counter;
 	BugsGen bugsGen;
-	howManyBugs = 3;
+	
+	howManyBugs = 10;
 
 	// <PART 1> - MAP AND BUGS FIST GENERATION + BUTTONS LOADING
 
@@ -28,12 +32,12 @@ int main()
 	Button btnMaxLifeSeconds("livetimer", "maxLifeSeconds");
 	Button btnRenewSeconds("floorrenew", "renewSeconds");
 
-	btnChildren.SetPos(0, 450);
-	btnResistance.SetPos(100, 450);
-	btnMaxAge.SetPos(200, 450);
-	btnMaxCanCopulateSeconds.SetPos(300, 450);
-	btnMaxLifeSeconds.SetPos(400, 450);
-	btnRenewSeconds.SetPos(500, 450);
+	btnChildren.SetPos(0, window.getSize().y - 300);
+	btnResistance.SetPos(0, window.getSize().y - 250);
+	btnMaxAge.SetPos(0, window.getSize().y - 200);
+	btnMaxCanCopulateSeconds.SetPos(0, window.getSize().y - 150);
+	btnMaxLifeSeconds.SetPos(0, window.getSize().y - 100);
+	btnRenewSeconds.SetPos(0, window.getSize().y - 50);
 
 	btnChildren.Draw(window);
 	btnResistance.Draw(window);
@@ -60,65 +64,63 @@ int main()
 				window.close();
 			case Event::MouseButtonPressed:
 				if (event.mouseButton.button == sf::Mouse::Left)
-				
 				{
-
 					if (btnChildren.Hover(window))
 					{
-						btnChildren.EditUp(bugsGen, mapGen);
+
+						btnChildren.EditUp(bugsGen, mapGen,window,counter);
 					}
 					if (btnResistance.Hover(window))
 					{
-						btnResistance.EditUp(bugsGen, mapGen);
+						btnResistance.EditUp(bugsGen, mapGen, window, counter);
 					}
 					if (btnMaxAge.Hover(window))
 					{
-						btnMaxAge.EditUp(bugsGen, mapGen);
+						btnMaxAge.EditUp(bugsGen, mapGen, window, counter);
 					}
 					if (btnMaxCanCopulateSeconds.Hover(window))
 					{
-						btnMaxCanCopulateSeconds.EditUp(bugsGen, mapGen);
+						btnMaxCanCopulateSeconds.EditUp(bugsGen, mapGen, window, counter);
 					}
 					if (btnMaxLifeSeconds.Hover(window))
 					{
-						btnMaxLifeSeconds.EditUp(bugsGen, mapGen);
+						btnMaxLifeSeconds.EditUp(bugsGen, mapGen, window, counter);
 					}
 					if (btnRenewSeconds.Hover(window))
 					{
-						btnRenewSeconds.EditUp(bugsGen, mapGen);
+						btnRenewSeconds.EditUp(bugsGen, mapGen, window, counter);
 					}
-
 				}
 				else if (event.mouseButton.button == sf::Mouse::Right)
 
 				{
 					if (btnChildren.Hover(window))
 					{
-						btnChildren.EditDown(bugsGen, mapGen);
+						btnChildren.EditDown(bugsGen, mapGen, window, counter);
 					}
 					if (btnResistance.Hover(window))
 					{
-						btnResistance.EditDown(bugsGen, mapGen);
+						btnResistance.EditDown(bugsGen, mapGen, window, counter);
 					}
 					if (btnMaxAge.Hover(window))
 					{
-						btnMaxAge.EditDown(bugsGen, mapGen);
+						btnMaxAge.EditDown(bugsGen, mapGen, window, counter);
 					}
 					if (btnMaxCanCopulateSeconds.Hover(window))
 					{
-						btnMaxCanCopulateSeconds.EditDown(bugsGen, mapGen);
+						btnMaxCanCopulateSeconds.EditDown(bugsGen, mapGen, window, counter);
 					}
 					if (btnMaxLifeSeconds.Hover(window))
 					{
-						btnMaxLifeSeconds.EditDown(bugsGen, mapGen);
+						btnMaxLifeSeconds.EditDown(bugsGen, mapGen, window, counter);
 					}
 					if (btnRenewSeconds.Hover(window))
 					{
-						btnRenewSeconds.EditDown(bugsGen, mapGen);
+						btnRenewSeconds.EditDown(bugsGen, mapGen, window, counter);
 					}
 				}
 			case Event::MouseMoved:
-				
+
 				if (btnChildren.Hover(window))
 				{
 					btnChildren.sprite.setColor(Color::Green);
@@ -172,15 +174,12 @@ int main()
 				{
 					btnRenewSeconds.sprite.setColor(Color::White);
 				}
-
 			}
 		}
 
 		unique_lock<mutex> locker(mu);
-
 		//cout << "Zablokowany moment poruszania" << endl;
 		mapGen.MapDrawUpdate(window);
-
 		btnChildren.Draw(window);
 		btnResistance.Draw(window);
 		btnMaxAge.Draw(window);
@@ -202,6 +201,12 @@ int main()
 					}
 				}
 				if (i != NULL)bugsGen.hungerBehaviour(mapGen, i);
+				btnChildren.Draw(window);
+				btnResistance.Draw(window);
+				btnMaxAge.Draw(window);
+				btnMaxCanCopulateSeconds.Draw(window);
+				btnMaxLifeSeconds.Draw(window);
+				btnRenewSeconds.Draw(window);
 			}
 		}
 		Sleep(1);
@@ -215,7 +220,6 @@ int main()
 
 void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 {
-
 	while (certainBug->isAlive == true)
 	{
 		Sleep(1000);
@@ -230,7 +234,6 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 				certainBug->readyToCopulate = true;
 			}
 		}
-
 		else if (certainBug->lifeSeconds > certainBug->maxLifeSeconds)
 		{
 			//cout << "Po czasie robak usuniety | Robakow jest: " << bugsGen.Bugs.size() << endl;
@@ -239,7 +242,7 @@ void liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 			cond.wait(locker);
 			//cout << "Warunek odebrany USUWAMY" << endl;
 			bugsGen.OldDeath(certainBug);
-			//cout << "Robak usuniety, jest ich: " << bugsGen.Bugs.size() << endl;
+			cout << "Robak usuniety, jest ich: " << bugsGen.Bugs.size() << endl;
 			break;
 		}
 	}
