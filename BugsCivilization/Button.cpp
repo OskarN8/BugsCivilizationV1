@@ -86,7 +86,12 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Coun
 			for (MapBlock* z : i)
 				z->renewSeconds++;
 		}
-		counter.Update(window, mapGen.MapBlocks2D[1][1]->renewSeconds, window.getSize().x - 200, window.getSize().y - 200);
+		counter.Update(window, mapGen.MapBlocks2D[1][1]->renewSeconds, 110, window.getSize().y - 35);
+		window.display();
+	}
+	else if (varName == "addNewBug")
+	{
+		counter.Update(window,int(bugsGen.Bugs.size()), 110, window.getSize().y - 335);
 		window.display();
 	}
 
@@ -146,10 +151,9 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Co
 			for(MapBlock* z : i)
 			if (z->renewSeconds > 1) z->renewSeconds--;
 		}
-		counter.Update(window, mapGen.MapBlocks2D[1][1]->renewSeconds, window.getSize().x - 200, window.getSize().y - 200);
+		counter.Update(window, mapGen.MapBlocks2D[1][1]->renewSeconds, 110, window.getSize().y - 35);
 		window.display();
 	}
-
 }
 
 

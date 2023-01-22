@@ -9,15 +9,18 @@ using namespace sf;
 using namespace std;
 class MapBlock
 {
-public:
-	bool isFull;
+private:
 	Vector2f pos;
 	Texture textureLava, textureBricks;
-	Sprite sprite;
-	int renewSeconds;
-	MapBlock( float, float);
-	void setSprite();
 	void loadTextures();
+
+public:
+	bool isFull;
+	int renewSeconds;
+	Sprite sprite;
+
+	MapBlock(float, float);
 	void renewTimer();
+	void setSprite();
 };
 #endif

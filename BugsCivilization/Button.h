@@ -14,19 +14,23 @@ using namespace std;
 
 class Button
 {
-public:
+private:
 	Counter counter;
 	Texture txt;
-	Sprite sprite;
 	FloatRect bounds;
 	string varName;
-	Button(string,string);
-	void SetPos(float, float);
-	bool Hover(RenderWindow&);
+
 	void LoadTexture(string name);
+
+public:
+	Sprite sprite;
+
+	Button(string, string);
 	void Draw(RenderWindow&);
-	void EditUp(BugsGen&, MapGen&, RenderWindow&,Counter&);
+	void EditUp(BugsGen&, MapGen&, RenderWindow&, Counter&);
 	void EditDown(BugsGen&, MapGen&, RenderWindow&, Counter&);
+	bool Hover(RenderWindow&);
+	void SetPos(float, float);
 
 };
 

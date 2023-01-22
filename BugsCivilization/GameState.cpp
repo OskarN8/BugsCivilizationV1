@@ -44,7 +44,7 @@ void GameState::GameStart(Vector2i dataForStart) {
 	mapGen.MapFirstDraw(window);
 
 	bugsGen.bugsFirstDraw(window, howManyBugs);
-	window.setFramerateLimit(20);
+	window.setFramerateLimit(40);
 
 
 	Button btnChildren("children", "children");
@@ -101,6 +101,7 @@ void GameState::GameStart(Vector2i dataForStart) {
 						BugsContent* newBug;
 						newBug = bugsGen.AddRandomBug(window);
 						new thread(&GameState::liveTimer, this, newBug, ref(bugsGen));
+						btnAddNewBug.EditUp(bugsGen, mapGen, window, counter);
 					}
 					if (btnChildren.Hover(window))
 					{

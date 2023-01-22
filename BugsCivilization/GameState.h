@@ -12,16 +12,18 @@
 
 class GameState
 {
-public:
-	GameState();
-	void GameStart(Vector2i);
+private:
 	void liveTimer(BugsContent*, BugsGen&);
-
 	int howManyBugs;
 
 	mutex mu;
 	unique_lock<mutex> locker;
 	condition_variable cond;
+
+public:
+	GameState();
+	void GameStart(Vector2i);
+
 
 };
 

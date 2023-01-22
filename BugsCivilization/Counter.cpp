@@ -5,7 +5,6 @@ Counter::Counter() {
 	setFont();
 	text.setFont(font);
 	text.setCharacterSize(19);
-	//text.setColor(Color::White);
 	text.setOutlineColor(Color::Black);
 	text.setOutlineThickness(4);
 }

@@ -62,14 +62,7 @@ void BugsGen::hungerBehaviour(MapGen& gen, BugsContent* certainBug)
 		cout << certainBug->hunger << endl;
 		HungerDeath(certainBug);
 	}
-	if (certainBug->hunger < 30)
-	{
-		certainBug->sprite.setColor(Color::Red);
-	}
-	else
-	{
-		certainBug->sprite.setColor(Color::White);
-	}
+
 	if (certainBug->hunger < 80 && certainBug->hungerResistance == false)
 	{
 		int rowX = (certainBug->pos.x + 25) / 100;

@@ -4,9 +4,7 @@
 using namespace sf;
 class StartMenu {
 
-public:
-	StartMenu();
-	Vector2i Open();
+private:
 	void SetUpBG();
 	void SetUpButtonsTxt();
 	void SetUpSprites(RenderWindow& window);
@@ -29,4 +27,8 @@ public:
 
 	Vector2i dataForGameState;
 	int howManyBugs = 5, winSize = 15;
+public:
+	Vector2i Open();
+	StartMenu();
+
 };

@@ -11,15 +11,17 @@ using namespace std;
 using namespace sf;
 class MapGen
 {
+private:
+	int counter = 0;
+	vector<MapBlock*> Blocks;
+
 public:
 	int gridLength = 10;
-	int counter = 0;
-
-	vector<MapBlock*> Blocks;
 	vector<vector<MapBlock*>> MapBlocks2D;
 
 	void MapFirstDraw(RenderWindow&);
 	void MapDrawUpdate(RenderWindow&);
+
 };
 
 #endif
