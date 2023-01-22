@@ -38,8 +38,9 @@ Vector2i StartMenu::Open() {
 		{
 			switch (event.type)
 			{
+
 			case Event::Closed:
-				exit(0);
+					exit(0);
 			case Event::MouseButtonPressed:
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{

@@ -86,11 +86,7 @@ void GameState::GameStart(Vector2i dataForStart) {
 		{
 			switch (event.type)
 			{
-			case sf::Event::KeyPressed:
-				if (event.key.code == sf::Keyboard::Escape)
-				{
-					window.close();
-				}
+
 			case Event::Closed:
 				window.close();
 			case Event::MouseButtonPressed:

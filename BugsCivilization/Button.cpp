@@ -41,6 +41,7 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Coun
 			counter.Update(window, i->children, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "hungerResistance")
 	{
@@ -50,6 +51,7 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Coun
 			counter.Update(window, i->hungerResistance, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "maxAge")
 	{
@@ -59,6 +61,7 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Coun
 			counter.Update(window, i->maxAge, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "maxCanCopulateSeconds")
 	{
@@ -68,6 +71,7 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Coun
 			counter.Update(window, i->maxCanCopulateSeconds-i->lifeSeconds, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "maxLifeSeconds")
 	{
@@ -77,6 +81,7 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Coun
 			counter.Update(window, i->maxLifeSeconds-i->lifeSeconds, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "renewSeconds")
 	{
@@ -88,11 +93,13 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Coun
 		}
 		counter.Update(window, mapGen.MapBlocks2D[1][1]->renewSeconds, 110, window.getSize().y - 35);
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "addNewBug")
 	{
 		counter.Update(window,int(bugsGen.Bugs.size()), 110, window.getSize().y - 335);
 		window.display();
+		Sleep(250);
 	}
 
 }
@@ -107,6 +114,7 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Co
 			counter.Update(window, i->children, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "hungerResistance")
 	{
@@ -116,6 +124,7 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Co
 			counter.Update(window, i->hungerResistance, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "maxAge")
 	{
@@ -125,6 +134,7 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Co
 			counter.Update(window, i->maxAge, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "maxCanCopulateSeconds")
 	{
@@ -134,6 +144,7 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Co
 			counter.Update(window, i->maxCanCopulateSeconds - i->lifeSeconds, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "maxLifeSeconds")
 	{
@@ -143,6 +154,7 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Co
 			counter.Update(window, i->maxLifeSeconds - i->lifeSeconds, i->pos.x + 25, i->pos.y + 25);
 		}
 		window.display();
+		Sleep(250);
 	}
 	else if (varName == "renewSeconds")
 	{
@@ -153,6 +165,7 @@ void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Co
 		}
 		counter.Update(window, mapGen.MapBlocks2D[1][1]->renewSeconds, 110, window.getSize().y - 35);
 		window.display();
+		Sleep(250);
 	}
 }
 
