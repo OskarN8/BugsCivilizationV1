@@ -42,6 +42,12 @@
     <ClInclude Include="Counter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -63,6 +69,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Counter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,6 +110,30 @@
       <Filter>images</Filter>
     </Image>
     <Image Include="images\livetimer.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\lavaBG.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\txtPlay.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\txtBugsNumber.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\txtWinSize.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\lavaBG2.jpg">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\bug2.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\lava2.png">
+      <Filter>images</Filter>
+    </Image>
+    <Image Include="images\bricks2.png">
       <Filter>images</Filter>
     </Image>
   </ItemGroup>

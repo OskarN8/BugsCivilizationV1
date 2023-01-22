@@ -13,8 +13,8 @@ MapBlock::MapBlock(float x, float y)
 
 void MapBlock::loadTextures()
 {
-	textureLava.loadFromFile("images/lava.png");
-	textureBricks.loadFromFile("images/bricks.png");
+	textureLava.loadFromFile("images/lava2.png");
+	textureBricks.loadFromFile("images/bricks2.png");
 }
 
 void MapBlock::setSprite()

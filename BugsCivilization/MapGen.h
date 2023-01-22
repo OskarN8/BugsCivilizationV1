@@ -12,8 +12,7 @@ using namespace sf;
 class MapGen
 {
 public:
-	int gridLengthX = 12;
-	int gridLengthY = 12;
+	int gridLength = 10;
 	int counter = 0;
 
 	vector<MapBlock*> Blocks;

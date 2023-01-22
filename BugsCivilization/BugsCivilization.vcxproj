@@ -143,31 +143,43 @@
     <ClInclude Include="BugsGen.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Counter.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MapBlock.h" />
     <ClInclude Include="MapGen.h" />
+    <ClInclude Include="StartMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BugsContent.cpp" />
     <ClCompile Include="BugsGen.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Counter.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapBlock.cpp" />
     <ClCompile Include="MapGen.cpp" />
+    <ClCompile Include="StartMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\bricks.jpg" />
     <Image Include="..\..\..\..\Desktop\lava.jpg" />
+    <Image Include="images\bricks2.png" />
     <Image Include="images\btn.png" />
     <Image Include="images\bug.png" />
+    <Image Include="images\bug2.png" />
     <Image Include="images\children.png" />
     <Image Include="images\floorrenew.png" />
+    <Image Include="images\lava2.png" />
+    <Image Include="images\lavaBG.jpg" />
+    <Image Include="images\lavaBG2.jpg" />
     <Image Include="images\livetimer.png" />
     <Image Include="images\maxage.png" />
     <Image Include="images\maxcopulate.png" />
     <Image Include="images\resistance.png" />
     <Image Include="images\robale.png" />
+    <Image Include="images\txtBugsNumber.png" />
+    <Image Include="images\txtPlay.png" />
+    <Image Include="images\txtWinSize.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\minecraft_font.ttf" />

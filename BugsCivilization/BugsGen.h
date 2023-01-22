@@ -12,9 +12,6 @@
 #include <string.h>
 
 
-	
-
-
 class BugsGen
 {
 public:

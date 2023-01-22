@@ -3,7 +3,7 @@
 
 void BugsGen::LoadTextures()
 {
-	this->txt.loadFromFile("images/bug.png");
+	this->txt.loadFromFile("images/bug2.png");
 }
 
 void BugsGen::bugsFirstDraw(RenderWindow& win, int howMany)
@@ -131,7 +131,7 @@ bool BugsGen::bugsCopulation(BugsContent* certainBug)
 
 void BugsGen::Growing(BugsContent* certainBug)
 {
-	if (certainBug->maxAge != certainBug->age &&(certainBug->lifeSeconds > certainBug->age * 10))
+	if (certainBug->maxAge != certainBug->age &&(certainBug->lifeSeconds > certainBug->age * 10) && certainBug->lifeSeconds < 50)
 	{
 		certainBug->age++;
 		certainBug->sprite.scale(certainBug->sprite.getScale().x + 0.25, certainBug->sprite.getScale().y + 0.25);

@@ -1,3 +1,7 @@
+#ifndef BUTTONH
+#define BUTTONH
+
+
 #include <SFML/Graphics.hpp>
 #include <string.h>
 #include <iostream>
@@ -26,3 +30,4 @@ public:
 
 };
 
+#endif
