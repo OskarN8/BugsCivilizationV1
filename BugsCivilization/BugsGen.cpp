@@ -40,7 +40,6 @@ void BugsGen::movingPath(RenderWindow& win, BugsContent* certainBug)
 		if (certainBug->pos != certainBug->endPosition)
 		{
 			(certainBug->pos.y < certainBug->endPosition.y) ? certainBug->pos.y += 1 : certainBug->pos.y -= 1;
-
 		}
 		certainBug->sprite.setPosition(certainBug->pos);
 		win.draw(certainBug->sprite);
@@ -136,6 +135,19 @@ void BugsGen::Growing(BugsContent* certainBug)
 		certainBug->age++;
 		certainBug->sprite.scale(certainBug->sprite.getScale().x + 0.25, certainBug->sprite.getScale().y + 0.25);
 	}
+}
+
+BugsContent* BugsGen::AddRandomBug(RenderWindow& win) 
+{
+
+	default_random_engine gen(time(NULL) + rand());
+
+		uniform_int_distribution<int> distX(1, win.getSize().x);
+		uniform_int_distribution<int> distY(1, win.getSize().y);
+		Bugs.push_back(new BugsContent(distX(gen) - 50, distY(gen) - 50, txt));
+		win.draw(Bugs.back()->sprite);
+		return Bugs.back();
+	
 }
 
 

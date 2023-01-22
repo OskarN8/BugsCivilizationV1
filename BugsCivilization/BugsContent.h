@@ -14,16 +14,20 @@ using namespace std;
 
 class BugsContent
 {
-public:
-	Sprite sprite;
+private:
 	Texture texture;
-	Vector2f pos, endPosition;
-	bool  needNewEndPosition, hungerResistance, canCopulate,readyToCopulate, isAlive;
-	int   maxCanCopulateSeconds, maxLifeSeconds, maxAge, age, lifeSeconds, copulateSeconds, children;
-	float hunger;
-	~BugsContent();
-	BugsContent(int,int,Texture);
+	bool canCopulate;
 
+public:
+
+	Vector2f endPosition, pos;
+	Sprite sprite;
+	int age,copulateSeconds, children, lifeSeconds, maxAge, maxCanCopulateSeconds, maxLifeSeconds;
+	float hunger;
+	bool hungerResistance, isAlive, needNewEndPosition, readyToCopulate;
+
+	~BugsContent();
+	BugsContent(int, int, Texture);
 
 };
 #endif

@@ -53,7 +53,9 @@ void GameState::GameStart(Vector2i dataForStart) {
 	Button btnMaxCanCopulateSeconds("maxcopulate", "maxCanCopulateSeconds");
 	Button btnMaxLifeSeconds("livetimer", "maxLifeSeconds");
 	Button btnRenewSeconds("floorrenew", "renewSeconds");
+	Button btnAddNewBug("addnewbug", "addNewBug");
 
+	btnAddNewBug.SetPos(0, window.getSize().y - 350);
 	btnChildren.SetPos(0, window.getSize().y - 300);
 	btnResistance.SetPos(0, window.getSize().y - 250);
 	btnMaxAge.SetPos(0, window.getSize().y - 200);
@@ -61,6 +63,7 @@ void GameState::GameStart(Vector2i dataForStart) {
 	btnMaxLifeSeconds.SetPos(0, window.getSize().y - 100);
 	btnRenewSeconds.SetPos(0, window.getSize().y - 50);
 
+	btnAddNewBug.Draw(window);
 	btnChildren.Draw(window);
 	btnResistance.Draw(window);
 	btnMaxAge.Draw(window);
@@ -93,6 +96,12 @@ void GameState::GameStart(Vector2i dataForStart) {
 			case Event::MouseButtonPressed:
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{
+					if (btnAddNewBug.Hover(window))
+					{
+						BugsContent* newBug;
+						newBug = bugsGen.AddRandomBug(window);
+						new thread(&GameState::liveTimer, this, newBug, ref(bugsGen));
+					}
 					if (btnChildren.Hover(window))
 					{
 
@@ -148,6 +157,14 @@ void GameState::GameStart(Vector2i dataForStart) {
 					}
 				}
 			case Event::MouseMoved:
+				if (btnAddNewBug.Hover(window))
+				{
+					btnAddNewBug.sprite.setColor(Color::Green);
+				}
+				else
+				{
+					btnAddNewBug.sprite.setColor(Color::White);
+				}
 
 				if (btnChildren.Hover(window))
 				{
@@ -208,6 +225,7 @@ void GameState::GameStart(Vector2i dataForStart) {
 		unique_lock<mutex> locker(mu);
 		//cout << "Zablokowany moment poruszania" << endl;
 		mapGen.MapDrawUpdate(window);
+		btnAddNewBug.Draw(window);
 		btnChildren.Draw(window);
 		btnResistance.Draw(window);
 		btnMaxAge.Draw(window);
@@ -230,6 +248,7 @@ void GameState::GameStart(Vector2i dataForStart) {
 					}
 				}
 				if (i != NULL)bugsGen.hungerBehaviour(mapGen, i);
+				btnAddNewBug.Draw(window);
 				btnChildren.Draw(window);
 				btnResistance.Draw(window);
 				btnMaxAge.Draw(window);
@@ -244,7 +263,6 @@ void GameState::GameStart(Vector2i dataForStart) {
 		//cout << "Odblokowany moment poruszania" << endl;
 		window.display();
 	}
-	//return 0;
 }
 
 void GameState::liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
@@ -271,7 +289,7 @@ void GameState::liveTimer(BugsContent* certainBug, BugsGen& bugsGen)
 			cond.wait(locker);
 			//cout << "Warunek odebrany USUWAMY" << endl;
 			bugsGen.OldDeath(certainBug);
-			cout << "Robak usuniety, jest ich: " << bugsGen.Bugs.size() << endl;
+			//cout << "Robak usuniety, jest ich: " << bugsGen.Bugs.size() << endl;
 			break;
 		}
 	}

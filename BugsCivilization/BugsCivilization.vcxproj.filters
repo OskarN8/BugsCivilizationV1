@@ -136,6 +136,9 @@
     <Image Include="images\bricks2.png">
       <Filter>images</Filter>
     </Image>
+    <Image Include="images\addnewbug.png">
+      <Filter>images</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\minecraft_font.ttf">

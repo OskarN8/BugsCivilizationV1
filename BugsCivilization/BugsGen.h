@@ -14,18 +14,21 @@
 
 class BugsGen
 {
-public:
-
+private:
 	Texture txt;
-	vector<BugsContent*> Bugs;
-	void bugsFirstDraw(RenderWindow&, int);
-	void movingPath(RenderWindow&, BugsContent*);
-	void hungerBehaviour(MapGen&, BugsContent*);
 	void HungerDeath(BugsContent*);
-	void OldDeath(BugsContent*);
+
+public:
+	vector<BugsContent*> Bugs;
+	BugsContent* AddRandomBug(RenderWindow&);
 	bool bugsCopulation(BugsContent*);
-	void LoadTextures();
+	void bugsFirstDraw(RenderWindow&, int);
 	void Growing(BugsContent*);
+	void hungerBehaviour(MapGen&, BugsContent*);
+	void LoadTextures();
+	void movingPath(RenderWindow&, BugsContent*);
+	void OldDeath(BugsContent*);
+
 };
 
 #endif

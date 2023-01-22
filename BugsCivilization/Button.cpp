@@ -89,6 +89,7 @@ void Button::EditUp(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Coun
 		counter.Update(window, mapGen.MapBlocks2D[1][1]->renewSeconds, window.getSize().x - 200, window.getSize().y - 200);
 		window.display();
 	}
+
 }
 
 void Button::EditDown(BugsGen& bugsGen, MapGen& mapGen, RenderWindow& window, Counter& counter)
